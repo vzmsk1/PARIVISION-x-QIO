@@ -1,0 +1,169 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--ff-main);
+  font-size: 0.5208335vw;
+  font-style: normal;
+  line-height: 1.2;
+
+  -webkit-animation: bugfix infinite 1s;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font: var(--txt-main);
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--c-primary);
+
+  background-color: var(--c-bg);
+
+  -webkit-animation: bugfix infinite 1s;
+  overflow-x: clip;
+}
+
+input,
+textarea {
+  margin: 0;
+  padding: 0;
+
+  border: none;
+
+  line-height: inherit;
+  color: inherit;
+
+  background-color: transparent;
+
+  -webkit-animation: bugfix infinite 1s;
+}
+
+a {
+  color: unset;
+}
+a,
+a:hover {
+  text-decoration: none;
+}
+
+button,
+input,
+a,
+textarea {
+  outline: none;
+
+  text-transform: inherit;
+
+  cursor: pointer;
+  font: inherit;
+
+  &:focus {
+    outline: none;
+  }
+  &:active {
+    outline: none;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+
+  font: inherit;
+}
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  object-fit: contain;
+}
+
+button {
+  padding: 0;
+
+  border: none;
+
+  font: inherit;
+  text-align: inherit;
+  color: inherit;
+
+  background-color: transparent;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  margin: 0;
+
+  -webkit-appearance: none;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.container {
+  margin: 0 auto;
+
+  width: 189.6rem;
+}
+
+// safari fix
+svg {
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 767px) {
+  html {
+    font-size: 5px;
+    font-size: calc((100 / 375) * 5vw);
+    -webkit-text-size-adjust: none;
+  }
+
+  body {
+    -webkit-text-size-adjust: none;
+  }
+
+  .container {
+    padding: 0 1.8rem;
+
+    width: 100%;
+  }
+}
+
+@media (min-width: 2500px) {
+  html {
+    font-size: 10px;
+  }
+}

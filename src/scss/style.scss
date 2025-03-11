@@ -1,0 +1,32 @@
+// -------------------------------- variables -------------------------------
+
+@import 'base/vars';
+
+// ---------------------------------- fonts ---------------------------------
+
+// local fonts
+@import 'base/fonts';
+
+// ------------------------------- base styles ------------------------------
+
+// base scss
+@import 'base/set';
+@import 'base/header';
+@import 'base/footer';
+
+// lib
+@import 'lib/swiper';
+@import 'lib/videojs';
+
+// common scss
+
+.wrapper {
+  position: relative;
+}
+
+html:not(._page-loaded) {
+  overflow: hidden;
+}
+// --------------------------------------------------------------------------
+
+// sections
