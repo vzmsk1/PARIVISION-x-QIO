@@ -1,0 +1,61 @@
+[data-section] {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+
+  .container {
+    flex: 1 1 auto;
+  }
+}
+
+.homepage {
+  body {
+    --y: 0;
+
+    background-image: url(@img/vectors/bg.svg);
+    background-position: 0 var(--y);
+    background-size: cover;
+    background-repeat: repeat;
+    background-attachment: fixed;
+
+    &::after {
+      content: '';
+
+      position: fixed;
+      inset: 0;
+
+      background: url(@img/vectors/2131327187.svg) center / 100% auto no-repeat;
+
+      pointer-events: none;
+
+      @media (max-width: 48em) {
+        background: url(@img/vectors/2131327189.svg) center / 100% auto
+          no-repeat;
+      }
+    }
+  }
+  .wrapper {
+    &::before,
+    &::after {
+      content: '';
+
+      position: fixed;
+      left: 0;
+
+      width: 100%;
+      height: 12.1rem;
+
+      background: linear-gradient(360deg, rgba(0, 0, 0, 0) 0%, #000000 78.16%);
+
+      filter: blur(1.35rem);
+    }
+    &::before {
+      top: 0;
+    }
+    &::after {
+      bottom: 0;
+
+      transform: rotate(-180deg);
+    }
+  }
+}

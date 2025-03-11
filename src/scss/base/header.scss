@@ -73,7 +73,8 @@
     left: 50%;
 
     font: var(--txt-x);
-    letter-spacing: 1%;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
 
     transform: translateX(-50%);
 
@@ -82,6 +83,8 @@
 
       margin-right: auto;
       padding-top: 0.2rem;
+
+      letter-spacing: 0.4rem;
 
       transform: none;
     }
@@ -137,7 +140,8 @@
 
   &__lang-item-txt {
     font: var(--txt-medium-hf);
-    letter-spacing: 7%;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
   }
 
   // .header__nav
@@ -161,7 +165,8 @@
     min-width: 7.6rem;
 
     font: var(--txt-medium-hf);
-    letter-spacing: 7%;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
   }
 
   // .header__menu-btn
@@ -172,8 +177,9 @@
     border-radius: 0.4rem;
 
     font: var(--txt-medium-hf);
-    letter-spacing: 7%;
+    letter-spacing: 0.1rem;
     color: var(--c-bg);
+    text-transform: uppercase;
 
     background-color: var(--c-primary);
 
@@ -182,8 +188,6 @@
       margin-top: 0.4rem;
 
       border-radius: 0.8rem;
-
-      letter-spacing: 0;
     }
   }
 }

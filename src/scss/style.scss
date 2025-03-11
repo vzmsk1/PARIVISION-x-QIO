@@ -13,13 +13,16 @@
 @import 'base/set';
 @import 'base/header';
 @import 'base/menu';
+@import 'base/layout';
 @import 'base/footer';
+@import 'base/homepage-table';
 
 // lib
 @import 'lib/swiper';
 @import 'lib/videojs';
 
 // common scss
+@import 'common/typo';
 
 .wrapper {
   position: relative;
@@ -31,3 +34,4 @@ html:not(._page-loaded) {
 // --------------------------------------------------------------------------
 
 // sections
+@import 'sections/hero';

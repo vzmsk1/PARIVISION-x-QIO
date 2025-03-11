@@ -12,6 +12,37 @@ export const isTouchDevice = () => {
   );
 };
 
+export const initWatchTimer = () => {
+  if (document.getElementById('cur-time')) {
+    const el = document.getElementById('cur-time');
+
+    const init = () => {
+      const today = new Date();
+      let hr = today.getHours();
+      let min = today.getMinutes();
+      let sec = today.getSeconds();
+
+      if (hr < 10) {
+        hr = '0' + hr;
+      }
+      if (min < 10) {
+        min = '0' + min;
+      }
+      if (sec < 10) {
+        sec = '0' + sec;
+      }
+
+      el.innerHTML = `
+      ${hr + ' : '}
+      ${min + ' : '}
+      ${sec}
+    `;
+    };
+
+    setInterval(init, 500);
+  }
+};
+
 export const shuffle = array => {
   return Array(array.length)
     .fill(null)

@@ -65,12 +65,11 @@
     justify-content: center;
 
     font: var(--txt-medium-hf);
+    letter-spacing: 0.1rem;
 
     @media (min-width: 48em) {
       min-width: 6.8rem;
       min-height: 3.3rem;
-
-      letter-spacing: 7%;
     }
   }
 
@@ -92,11 +91,13 @@
 
   &__nav-link {
     font: var(--txt-x);
-    letter-spacing: 1%;
+    letter-spacing: 0.2rem;
     text-align: right;
+    text-transform: uppercase;
 
     @media (max-width: 48em) {
       font-size: var(--fz-130-hf);
+      letter-spacing: 0.4rem;
     }
   }
 }

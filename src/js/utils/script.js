@@ -1,5 +1,13 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/all';
+import { initHomepageAnim, itemsTl, setProps } from '../anim/homepage';
+import { initWatchTimer } from './utils';
+
+if (document.querySelector('.hero')) {
+  document.querySelector('body').style.opacity = 0;
+
+  setProps();
+}
 
 export const mm = gsap.matchMedia();
 
@@ -26,9 +34,17 @@ document.addEventListener('DOMContentLoaded', function () {
   document.addEventListener('click', onClickHandler);
 });
 window.addEventListener('load', function () {
+  document.querySelector('body').style.opacity = 1;
+
   document.documentElement.classList.add('_page-loaded');
 
   ScrollTrigger.refresh();
 
-  window.scrollTo(0, 0);
+  // window.scrollTo(0, 0);
+
+  if (document.querySelector('.hero')) {
+    initHomepageAnim();
+  }
+
+  initWatchTimer();
 });

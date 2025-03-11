@@ -9,25 +9,41 @@
   --ff-heading: 'Heading Now';
   --ff-mono: 'Aeonik Mono';
   --ff-mono: 'Aeonik Mono';
-  --ff-numeric: 'Druk Text Wide Cyr';
+  --ff-numeric: 'Druk Text Cyr';
 
   // font size
+  --fz-8-hf: 0.846rem;
+  --fz-13-hf: 1.357rem;
   --fz-15-hf: 1.55rem;
   --fz-16: 1.6rem;
+  --fz-16-hf: 1.692rem;
+  --fz-18-hf: 1.807rem;
   --fz-21-hf: 2.134rem;
+  --fz-27-hf: 2.706rem;
+  --fz-36: 3.6rem;
   --fz-61-hf: 6.082rem;
   --fz-69: 6.9rem;
   --fz-130-hf: 13.079rem;
+  --fz-223-hf: 22.376rem;
+  --fz-337-hf: 33.727rem;
 
   // typography
-  --txt-medium-hf: 500 var(--fz-15-hf) / 1 var(--ff-main);
-  --txt-main: 400 var(--fz-16) / 1 var(--ff-main);
+  --txt-xs: 400 var(--fz-8-hf) / calc(100% + 0.4rem) var(--ff-heading);
+  --txt-s: 400 var(--fz-13-hf) / calc(100% + 0.4rem) var(--ff-heading);
+  --txt-medium-hf: 500 var(--fz-15-hf) / calc(100% + 0.4rem) var(--ff-main);
+  --txt-main: 400 var(--fz-16) / calc(100% + 0.4rem) var(--ff-main);
   --txt-x: italic 800 var(--fz-69) / 82.1% var(--ff-heading);
+
+  --h-xxl: italic 800 var(--fz-337-hf) / 82.1% var(--ff-heading);
 
   // svg
 
   @media (max-width: 48em) {
-    --txt-medium-hf: 400 var(--fz-21-hf) / 1 var(--ff-main);
+    --txt-xs: 400 var(--fz-16-hf) / calc(100% + 0.4rem) var(--ff-heading);
+    --txt-s: 400 var(--fz-21-hf) / calc(100% + 0.4rem) var(--ff-heading);
+    --txt-medium-hf: 400 var(--fz-21-hf) / calc(100% + 0.4rem) var(--ff-main);
     --txt-x: italic 800 var(--fz-61-hf) / 82.1% var(--ff-heading);
+
+    --h-xxl: italic 800 var(--fz-223-hf) / 82.1% var(--ff-heading);
   }
 }

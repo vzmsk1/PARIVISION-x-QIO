@@ -6,4 +6,5 @@ gsap.registerPlugin(ScrollTrigger);
 
 import './utils/script.js';
 
+import './lib/lenis.js';
 import './lib/lib.js';
