@@ -12,10 +12,22 @@
   --ff-numeric: 'Druk Text Wide Cyr';
 
   // font size
+  --fz-15-hf: 1.55rem;
   --fz-16: 1.6rem;
+  --fz-21-hf: 2.134rem;
+  --fz-61-hf: 6.082rem;
+  --fz-69: 6.9rem;
+  --fz-130-hf: 13.079rem;
 
   // typography
+  --txt-medium-hf: 500 var(--fz-15-hf) / 1 var(--ff-main);
   --txt-main: 400 var(--fz-16) / 1 var(--ff-main);
+  --txt-x: italic 800 var(--fz-69) / 82.1% var(--ff-heading);
 
   // svg
+
+  @media (max-width: 48em) {
+    --txt-medium-hf: 400 var(--fz-21-hf) / 1 var(--ff-main);
+    --txt-x: italic 800 var(--fz-61-hf) / 82.1% var(--ff-heading);
+  }
 }

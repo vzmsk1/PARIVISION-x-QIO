@@ -10,7 +10,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  const onClickHandler = e => {};
+  const onClickHandler = e => {
+    if (e.target.closest('.header__menu-btn')) {
+      document.documentElement.classList.add('_show-menu');
+    }
+    if (
+      e.target.closest('._show-menu') &&
+      (e.target.closest('.menu__close-btn') || !e.target.closest('.menu')) &&
+      !e.target.closest('.header__menu-btn')
+    ) {
+      document.documentElement.classList.remove('_show-menu');
+    }
+  };
 
   document.addEventListener('click', onClickHandler);
 });
