@@ -15,6 +15,25 @@ html {
 
   -webkit-animation: bugfix infinite 1s;
   user-select: none;
+
+  &.homepage._hf {
+    font-size: 1.06vh;
+
+    @media (max-width: 49em) {
+      font-size: 0.69vh;
+    }
+
+    @media (min-width: 49.01em) {
+      body::after {
+        background: url(@img/vectors/2131327187.svg) center 40% / 100% auto
+          no-repeat;
+      }
+
+      .container {
+        width: 99%;
+      }
+    }
+  }
 }
 
 body {
@@ -142,7 +161,7 @@ svg {
   -webkit-transform: translate3d(0, 0, 0);
 }
 
-@media (max-width: 767px) {
+@media (max-width: 49em) {
   html {
     font-size: 5px;
     font-size: calc((100 / 430) * 5vw);
@@ -157,11 +176,5 @@ svg {
     padding: 0 1.8rem;
 
     width: 100%;
-  }
-}
-
-@media (min-width: 2500px) {
-  html {
-    font-size: 10px;
   }
 }

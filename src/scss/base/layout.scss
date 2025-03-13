@@ -1,4 +1,7 @@
 [data-section] {
+  position: fixed;
+  inset: 0;
+
   display: flex;
   flex-direction: column;
   height: 100dvh;
@@ -6,9 +9,27 @@
   .container {
     flex: 1 1 auto;
   }
+
+  &:not(._is-active) {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .homepage {
+  height: 100dvh;
+
+  .blur-t {
+    opacity: 0;
+    filter: blur(0.3rem);
+    transform: translateY(14rem);
+  }
+
+  .opacity-t {
+    opacity: 0;
+    transform: translateY(14rem);
+  }
+
   body {
     --y: 0;
 
@@ -28,7 +49,7 @@
 
       pointer-events: none;
 
-      @media (max-width: 48em) {
+      @media (max-width: 49em) {
         background: url(@img/vectors/2131327189.svg) center / 100% auto
           no-repeat;
       }

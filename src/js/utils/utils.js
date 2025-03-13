@@ -97,7 +97,7 @@ export const dynamicDOM = () => {
   }
 
   // add a media query. When it matches, the associated function will run
-  mm.add('(max-width: 767px)', () => {
+  mm.add('(max-width: 49em)', () => {
     // this setup code only runs when viewport is at least 800px wide
 
     elementsData.forEach(el => {

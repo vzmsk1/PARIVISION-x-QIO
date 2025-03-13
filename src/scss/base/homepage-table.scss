@@ -6,7 +6,12 @@
 
   width: 100%;
 
-  @media (max-width: 48em) {
+  .homepage & {
+    filter: blur(0.3rem);
+    opacity: 0;
+  }
+
+  @media (max-width: 49em) {
     padding: 0 1.8rem;
 
     bottom: 4rem;
@@ -15,7 +20,7 @@
   // .homepage-table__container
 
   &__container {
-    @media (min-width: 48.01em) {
+    @media (min-width: 49.01em) {
       display: grid;
       grid-template-columns: 12fr 9fr 4fr;
       align-items: end;
@@ -33,7 +38,7 @@
     align-items: flex-end;
     column-gap: 6.2rem;
 
-    @media (max-width: 48em) {
+    @media (max-width: 49em) {
       display: none;
     }
   }
@@ -59,7 +64,7 @@
   // .homepage-table__info
 
   &__info {
-    @media (max-width: 48em) {
+    @media (max-width: 49em) {
       display: none;
     }
   }
@@ -76,7 +81,7 @@
     display: flex;
     flex-direction: column;
 
-    @media (max-width: 48em) {
+    @media (max-width: 49em) {
       width: 100%;
     }
   }
@@ -130,7 +135,7 @@
 
     background-color: var(--c-primary);
 
-    @media (max-width: 48em) {
+    @media (max-width: 49em) {
       padding: 2.6rem 3.8rem;
 
       border-radius: 0.8rem;
@@ -144,7 +149,7 @@
     flex-direction: column;
     row-gap: 0.1rem;
 
-    @media (max-width: 48em) {
+    @media (max-width: 49em) {
       row-gap: 0.8rem;
       align-items: center;
 
@@ -159,7 +164,7 @@
       font-family: var(--ff-main);
       font-weight: 500;
 
-      @media (max-width: 48em) {
+      @media (max-width: 49em) {
         font-size: var(--fz-27-hf);
       }
     }
@@ -170,7 +175,7 @@
   &__txt {
     color: rgba(0, 0, 0, 0.4);
 
-    @media (max-width: 48em) {
+    @media (max-width: 49em) {
       font-size: var(--fz-13-hf);
     }
   }
@@ -181,7 +186,7 @@
     flex: 0 0 2rem;
     width: 2rem;
 
-    @media (max-width: 48em) {
+    @media (max-width: 49em) {
       flex: 0 0 4rem;
       width: 4rem;
     }
@@ -208,7 +213,7 @@
     width: 1.6rem;
     height: 1.5rem;
 
-    @media (max-width: 48em) {
+    @media (max-width: 49em) {
       display: none;
     }
   }
@@ -221,7 +226,7 @@
     letter-spacing: -0.1rem;
     font-weight: 500;
 
-    @media (max-width: 48em) {
+    @media (max-width: 49em) {
       font-size: var(--fz-36);
     }
   }
