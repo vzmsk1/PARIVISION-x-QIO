@@ -19,6 +19,11 @@
 .homepage {
   height: 100dvh;
 
+  .blur {
+    opacity: 0;
+    filter: blur(0.3rem);
+  }
+
   .blur-t {
     opacity: 0;
     filter: blur(0.3rem);
@@ -78,5 +83,11 @@
 
       transform: rotate(-180deg);
     }
+  }
+}
+
+._desktop-only {
+  @media (max-width: 49em) {
+    display: none;
   }
 }

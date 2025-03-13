@@ -66,10 +66,12 @@ export const resetActiveSection = (section, deltaY = -1) => {
     const prevIdx = deltaY === 1 ? curIdx - 1 : curIdx + 1;
 
     const transition = prevTl => {
+      const tl = timelines.filter(tl => tl.vars.id === `${curIdx}-on`)[0];
       removeClasses(sections, ACTIVE_CLASS);
       sections[curIdx].classList.add(ACTIVE_CLASS);
-      console.log(timelines.filter(tl => tl.vars.id === `${curIdx}-on`)[0]);
-      timelines.filter(tl => tl.vars.id === `${curIdx}-on`)[0].restart(true);
+      if (tl) {
+        tl.restart(true);
+      }
       prevTl.revert();
     };
     if (prevIdx >= 0 && document.querySelector(`.${INIT_SCROLL_CLASS}`)) {

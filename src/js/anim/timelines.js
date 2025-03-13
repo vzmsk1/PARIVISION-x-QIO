@@ -1,17 +1,16 @@
 import gsap from 'gsap';
 import { initItemsAnim, itemsTl } from './homepage';
 import {
-  ACTIVE_CLASS,
   ANIMATING_CLASS,
   INIT_SCROLL_CLASS,
   initHomepageScroll,
   observer,
   sections,
 } from './homepage-scroll';
-import { removeClasses } from '../utils/utils';
 
 const sectionMain = document.querySelector('[data-section="main"]');
 const sectionAbout = document.querySelector('[data-section="about"]');
+const sectionTeam = document.querySelector('[data-section="team"]');
 
 const clearedProps = {
   opacity: 1,
@@ -21,6 +20,10 @@ const clearedProps = {
 const blurTopProps = {
   opacity: 0,
   filter: 'blur(0.3rem)',
+  translateY: '-14rem',
+};
+const opacityTopProps = {
+  opacity: 0,
   translateY: '-14rem',
 };
 
@@ -97,4 +100,24 @@ tlAbout
   );
 tlAboutLeave.to('.about__container', blurTopProps);
 
-export const timelines = [tlMain, tlMainLeave, tlAbout, tlAboutLeave];
+export const tlTeam = gsap.timeline({
+  ...onDefaults,
+  id: `${sections.indexOf(sectionTeam)}-on`,
+});
+export const tlTeamLeave = gsap.timeline({
+  ...offDefaults,
+  id: `${sections.indexOf(sectionTeam)}-off`,
+});
+tlTeam.to('.team__text-wrap, .team__heading', clearedProps);
+tlTeamLeave
+  .to('.team__heading', blurTopProps)
+  .to('.team__text-wrap', opacityTopProps, 0);
+
+export const timelines = [
+  tlMain,
+  tlMainLeave,
+  tlAbout,
+  tlAboutLeave,
+  tlTeam,
+  tlTeamLeave,
+];

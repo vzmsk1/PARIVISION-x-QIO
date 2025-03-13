@@ -39,10 +39,6 @@
   // .about__heading-txt
 
   &__heading-txt {
-    font: var(--h-x);
-    white-space: nowrap;
-    letter-spacing: 0.1rem;
-
     @media (min-width: 49.01em) {
       &:first-child {
         margin-right: 72.5rem;
@@ -78,10 +74,6 @@
 
   &__text {
     max-width: 55.2rem;
-
-    font: var(--txt-s);
-
-    opacity: 0.7;
 
     @media (max-width: 49em) {
       &._desktop-only {

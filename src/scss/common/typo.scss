@@ -6,3 +6,15 @@
 .txt-xs {
   font: var(--txt-xs);
 }
+
+.screen-heading {
+  font: var(--h-x);
+  white-space: nowrap;
+  letter-spacing: 0.1rem;
+}
+
+.screen-txt {
+  font: var(--txt-s);
+
+  opacity: 0.7;
+}
