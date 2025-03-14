@@ -25,6 +25,10 @@
       grid-template-columns: 12fr 9fr 4fr;
       align-items: end;
 
+      ._center & {
+        grid-template-columns: 10fr 5fr 10fr;
+      }
+
       &.container {
         padding: 1.2rem;
       }
@@ -61,9 +65,21 @@
     }
   }
 
+  // .homepage-table__btn
+
+  &__btn {
+    &:not(._center &) {
+      display: none;
+    }
+  }
+
   // .homepage-table__info
 
   &__info {
+    ._center & {
+      display: none;
+    }
+
     @media (max-width: 49em) {
       display: none;
     }
@@ -81,8 +97,18 @@
     display: flex;
     flex-direction: column;
 
+    @media (min-width: 49.01em) {
+      margin-left: auto;
+
+      width: 30rem;
+    }
+
     @media (max-width: 49em) {
       width: 100%;
+
+      ._center & {
+        display: none;
+      }
     }
   }
 

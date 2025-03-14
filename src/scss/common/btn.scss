@@ -1,0 +1,90 @@
+.frame-btn {
+  position: relative;
+
+  display: inline-flex;
+
+  @media (max-width: 49em) {
+    width: 100%;
+  }
+
+  &::before,
+  &::after,
+  &__inner::before,
+  &__inner::after {
+    content: '';
+
+    position: absolute;
+
+    width: 1.25rem;
+    height: 1.25rem;
+
+    border: 1px solid var(--c-primary);
+    border-right: none;
+    border-bottom: none;
+    border-radius: 0.4rem;
+
+    @media (max-width: 49em) {
+      width: 2rem;
+      height: 2rem;
+
+      border-radius: 0.6rem;
+    }
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+  }
+
+  &::after {
+    top: 0;
+    right: 0;
+
+    transform: scaleX(-1);
+  }
+
+  // .frame-btn__inner
+
+  &__inner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 6.3rem;
+    min-width: 38.6rem;
+
+    @media (max-width: 49em) {
+      height: 11.6rem;
+      width: 100%;
+    }
+
+    &::before {
+      bottom: 0;
+      left: 0;
+
+      transform: scaleY(-1);
+    }
+
+    &::after {
+      bottom: 0;
+      right: 0;
+
+      transform: scale(-1, -1);
+    }
+  }
+
+  // .frame-btn__txt
+
+  &__txt {
+    padding: 0.9rem 3.4rem;
+
+    border-radius: 0.7rem;
+    background-color: var(--c-primary);
+
+    color: var(--c-bg);
+    text-transform: uppercase;
+
+    @media (max-width: 49em) {
+      padding: 2.2rem 2.4rem;
+    }
+  }
+}

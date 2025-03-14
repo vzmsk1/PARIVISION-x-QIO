@@ -23,6 +23,7 @@
 
 // common scss
 @import 'common/typo';
+@import 'common/btn';
 
 .wrapper {
   position: relative;
@@ -37,3 +38,4 @@ html:not(._page-loaded) {
 @import 'sections/hero';
 @import 'sections/about';
 @import 'sections/team';
+@import 'sections/leaders';

@@ -37,6 +37,7 @@
 
   body {
     --y: 0;
+    --opacity: 1;
 
     background-image: url(@img/vectors/bg.svg);
     background-position: 0 var(--y);
@@ -53,6 +54,8 @@
       background: url(@img/vectors/2131327187.svg) center / 100% auto no-repeat;
 
       pointer-events: none;
+
+      opacity: var(--opacity);
 
       @media (max-width: 49em) {
         background: url(@img/vectors/2131327189.svg) center / 100% auto
@@ -74,6 +77,15 @@
       background: linear-gradient(360deg, rgba(0, 0, 0, 0) 0%, #000000 78.16%);
 
       filter: blur(1.35rem);
+
+      @media (max-width: 49em) {
+        left: -2rem;
+
+        width: 107dvw;
+        height: 51.4rem;
+
+        filter: blur(2.7rem);
+      }
     }
     &::before {
       top: 0;
@@ -82,6 +94,10 @@
       bottom: 0;
 
       transform: rotate(-180deg);
+
+      @media (max-width: 49em) {
+        bottom: -4rem;
+      }
     }
   }
 }

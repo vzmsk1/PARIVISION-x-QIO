@@ -2,6 +2,7 @@ import gsap from 'gsap';
 import { Observer } from 'gsap/all';
 import { isTouchDevice, removeClasses } from '../utils/utils';
 import { timelines } from './timelines';
+import { headings, initLeadersScreenObserver } from './homepage';
 
 gsap.registerPlugin(Observer);
 
@@ -12,7 +13,10 @@ export const ACTIVE_CLASS = '_is-active';
 export const INIT_SCROLL_CLASS = '_init-scroll';
 
 let yPos = 0;
+let leadersIdx = 0;
 
+const leaders = gsap.utils.toArray('.leaders__group');
+const table = document.querySelector('.homepage-table');
 const heading = document.getElementById('section-heading');
 const bullets = document.querySelectorAll('.homepage-table__bullet');
 export const sections = gsap.utils.toArray('[data-section]');
@@ -32,28 +36,76 @@ const scroll = (self, i, deltaY) => {
   }
 };
 
+const down = self => {
+  const activeIdx = sections.indexOf(
+    document.querySelector(`[data-section].${ACTIVE_CLASS}`)
+  );
+  const next = sections[activeIdx + 1];
+
+  if (next) {
+    if (sections[activeIdx].dataset.section !== 'leaders') {
+      scroll(self, activeIdx, 1);
+    } else {
+      leadersIdx = leaders[leadersIdx + 1] ? leadersIdx + 1 : 0;
+
+      if (
+        leadersIdx !== 0 &&
+        !headings[headings.length - 1].classList.contains('_is-active')
+      ) {
+        initLeadersScreenObserver(self, leaders, leadersIdx);
+      } else if (
+        headings[headings.length - 1].classList.contains('_is-active')
+      ) {
+        document.documentElement.classList.remove('leaders-screen');
+        scroll(self, activeIdx, 1);
+      }
+    }
+  }
+};
+const up = self => {
+  const activeIdx = sections.indexOf(
+    document.querySelector(`[data-section].${ACTIVE_CLASS}`)
+  );
+  const next = sections[activeIdx - 1];
+
+  if (next) {
+    if (
+      sections[activeIdx].dataset.section !== 'leaders' ||
+      leaders[0].classList.contains('_is-active')
+    ) {
+      scroll(self, activeIdx, -1);
+    } else {
+      leadersIdx = headings.indexOf(
+        document.querySelector('.leaders__group-heading._is-active')
+      );
+      leadersIdx -= 1;
+
+      if (leadersIdx !== -1) {
+        initLeadersScreenObserver(self, leaders, leadersIdx);
+      } else {
+        document.documentElement.classList.remove('leaders-screen');
+        scroll(self, activeIdx, -1);
+      }
+    }
+  }
+};
+
 export const observer = Observer.create({
   target: '.homepage',
   type: 'wheel,touch',
   wheelSpeed: isTouch ? -1 : 1,
   onUp: self => {
-    const activeIdx = sections.indexOf(
-      document.querySelector(`[data-section].${ACTIVE_CLASS}`)
-    );
-    const next = isTouch ? sections[activeIdx + 1] : sections[activeIdx - 1];
-
-    if (next) {
-      scroll(self, activeIdx, isTouch ? 1 : -1);
+    if (isTouch) {
+      down(self);
+    } else {
+      up(self);
     }
   },
   onDown: self => {
-    const activeIdx = sections.indexOf(
-      document.querySelector(`[data-section].${ACTIVE_CLASS}`)
-    );
-    const next = isTouch ? sections[activeIdx - 1] : sections[activeIdx + 1];
-
-    if (next) {
-      scroll(self, activeIdx, isTouch ? -1 : 1);
+    if (isTouch) {
+      up(self);
+    } else {
+      down(self);
     }
   },
 });
@@ -88,6 +140,20 @@ export const resetActiveSection = (section, deltaY = -1) => {
     yPos = deltaY === 1 ? yPos + 16 : yPos - 16;
 
     gsap.to('body', { '--y': `${yPos}rem`, duration: 2 });
+
+    if (table) {
+      if (
+        !section.classList.contains('hero') &&
+        !section.classList.contains('about') &&
+        !section.classList.contains('team')
+      ) {
+        table.classList.add('_center');
+        gsap.to('body', { '--opacity': 0 });
+      } else {
+        table.classList.remove('_center');
+        gsap.to('body', { '--opacity': 1 });
+      }
+    }
 
     if (bullets.length && curBullet) {
       removeClasses(bullets, ACTIVE_CLASS);

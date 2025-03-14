@@ -1,9 +1,31 @@
 import gsap from 'gsap';
 import { ACTIVE_CLASS, resetActiveSection } from './homepage-scroll';
 import { isTouch } from '../utils/script';
-import { tlMain } from './timelines';
+import { tlLeadersLeave, tlMain } from './timelines';
+import { Observer } from 'gsap/all';
+import { removeClasses } from '../utils/utils';
 
-const list = document.querySelector('.homepage-table__list');
+export const list = document.querySelector('.homepage-table__list');
+export const headings = gsap.utils.toArray('.leaders__group-heading');
+
+export const initLeadersScreenObserver = (self, leaders, leadersIdx) => {
+  self.disable();
+
+  leaders[leadersIdx] && leaders[leadersIdx].classList.add('_is-visible');
+  if (headings[leadersIdx]) {
+    removeClasses(headings, '_is-active');
+    headings[leadersIdx].classList.add('_is-active');
+  }
+  if (isTouch && leadersIdx !== 0) {
+    gsap.to('.leaders__group_center', { opacity: 0, translateY: '8rem' });
+  } else {
+    gsap.to('.leaders__group_center', { opacity: 1, translateY: 0 });
+  }
+
+  setTimeout(() => {
+    self.enable();
+  }, 1000);
+};
 
 export const itemsTl = gsap
   .timeline({ paused: true })
