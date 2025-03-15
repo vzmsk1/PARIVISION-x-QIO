@@ -16,6 +16,7 @@ const sectionLeaders = document.querySelector('[data-section="leaders"]');
 const sectionTeams = document.querySelector('[data-section="teams"]');
 const sectionNews = document.querySelector('[data-section="news"]');
 const sectionContacts = document.querySelector('[data-section="contacts"]');
+const sectionLinks = document.querySelector('[data-section="links"]');
 
 const clearedProps = {
   opacity: 1,
@@ -216,6 +217,27 @@ tlContactsLeave.to('.news__container', {
   },
 });
 
+export const tlLinks = gsap.timeline({
+  ...onDefaults,
+  id: `${sections.indexOf(sectionLinks)}-on`,
+});
+export const tlLinksLeave = gsap.timeline({
+  ...offDefaults,
+  id: `${sections.indexOf(sectionLinks)}-off`,
+});
+tlLinks.to('.links__container', {
+  ...clearedProps,
+  onStart: () => {
+    table && table.classList.add('_is-hidden');
+  },
+});
+tlLinksLeave.to('.links__container', {
+  opacity: 0,
+  onComplete: () => {
+    table && table.classList.remove('_is-hidden');
+  },
+});
+
 export const timelines = [
   tlMain,
   tlMainLeave,
@@ -231,4 +253,6 @@ export const timelines = [
   tlNewsLeave,
   tlContacts,
   tlContactsLeave,
+  tlLinks,
+  tlLinksLeave,
 ];

@@ -7,6 +7,12 @@
   font: var(--txt-xs);
 }
 
+.h-x {
+  font: var(--txt-x);
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+}
+
 .screen-heading {
   font: var(--h-x);
   white-space: nowrap;

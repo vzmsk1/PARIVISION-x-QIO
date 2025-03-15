@@ -72,10 +72,6 @@
     top: 1.4rem;
     left: 50%;
 
-    font: var(--txt-x);
-    letter-spacing: 0.2rem;
-    text-transform: uppercase;
-
     transform: translateX(-50%);
 
     @media (min-width: 49.01em) {
@@ -83,8 +79,6 @@
 
       margin-right: auto;
       padding-top: 0.2rem;
-
-      letter-spacing: 0.4rem;
 
       transform: none;
     }
