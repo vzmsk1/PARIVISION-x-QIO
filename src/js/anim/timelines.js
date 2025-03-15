@@ -8,11 +8,13 @@ import {
   sections,
 } from './homepage-scroll';
 
+const table = document.querySelector('.homepage-table');
 const sectionMain = document.querySelector('[data-section="main"]');
 const sectionAbout = document.querySelector('[data-section="about"]');
 const sectionTeam = document.querySelector('[data-section="team"]');
 const sectionLeaders = document.querySelector('[data-section="leaders"]');
 const sectionTeams = document.querySelector('[data-section="teams"]');
+const sectionNews = document.querySelector('[data-section="news"]');
 
 const clearedProps = {
   opacity: 1,
@@ -128,6 +130,8 @@ tlLeaders.to('.leaders__container, .leaders__group_center', {
   onStart: () => {
     document.documentElement.classList.add('leaders-screen');
 
+    table && table.classList.add('_leaders-btn');
+
     if (!document.querySelector('.leaders__group._is-visible')) {
       document
         .querySelector('.leaders__group-heading_main')
@@ -137,6 +141,9 @@ tlLeaders.to('.leaders__container, .leaders__group_center', {
 });
 tlLeadersLeave.to('.leaders__container', {
   opacity: 0,
+  onComplete: () => {
+    table && table.classList.remove('_leaders-btn');
+  },
 });
 
 export const tlTeams = gsap.timeline({
@@ -151,6 +158,9 @@ tlTeams
   .to('.teams__item', {
     ...clearedProps,
     stagger: 0.3,
+    onStart: () => {
+      table && table.classList.add('_teams-btn');
+    },
   })
   .to('.item-teams__logo', {
     scaleY: 1,
@@ -158,6 +168,30 @@ tlTeams
   });
 tlTeamsLeave.to('.teams__container', {
   opacity: 0,
+  onComplete: () => {
+    table && table.classList.remove('_teams-btn');
+  },
+});
+
+export const tlNews = gsap.timeline({
+  ...onDefaults,
+  id: `${sections.indexOf(sectionNews)}-on`,
+});
+export const tlNewsLeave = gsap.timeline({
+  ...offDefaults,
+  id: `${sections.indexOf(sectionNews)}-off`,
+});
+tlNews.to('.news__container', {
+  ...clearedProps,
+  onStart: () => {
+    table && table.classList.add('_news-btn');
+  },
+});
+tlNewsLeave.to('.news__container', {
+  opacity: 0,
+  onComplete: () => {
+    table && table.classList.remove('_news-btn');
+  },
 });
 
 export const timelines = [
@@ -171,4 +205,6 @@ export const timelines = [
   tlLeadersLeave,
   tlTeams,
   tlTeamsLeave,
+  tlNews,
+  tlNewsLeave,
 ];

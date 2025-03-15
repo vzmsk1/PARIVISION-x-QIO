@@ -25,12 +25,15 @@
       grid-template-columns: 12fr 9fr 4fr;
       align-items: end;
 
-      ._center & {
+      ._teams-btn &,
+      ._leaders-btn &,
+      ._news-btn & {
         grid-template-columns: 10fr 5fr 10fr;
       }
 
       &.container {
         padding: 1.2rem;
+        padding-top: 0;
       }
     }
   }
@@ -68,15 +71,32 @@
   // .homepage-table__btn
 
   &__btn {
-    &:not(._center &) {
+    &.frame-btn {
       display: none;
+      ._teams-btn & {
+        &.homepage-table__btn_teams {
+          display: inline-flex;
+        }
+      }
+      ._leaders-btn & {
+        &.homepage-table__btn_leaders {
+          display: inline-flex;
+        }
+      }
+      ._news-btn & {
+        &.homepage-table__btn_news {
+          display: inline-flex;
+        }
+      }
     }
   }
 
   // .homepage-table__info
 
   &__info {
-    ._center & {
+    ._teams-btn &,
+    ._leaders-btn &,
+    ._news-btn & {
       display: none;
     }
 
@@ -106,7 +126,9 @@
     @media (max-width: 49em) {
       width: 100%;
 
-      ._center & {
+      ._teams-btn &,
+      ._leaders-btn &,
+      ._news-btn & {
         display: none;
       }
     }

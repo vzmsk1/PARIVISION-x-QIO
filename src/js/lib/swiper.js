@@ -1,5 +1,32 @@
 import Swiper from 'swiper';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import { remToPx } from '../utils/utils';
+import { mm } from '../utils/script';
 
-window.addEventListener('load', function () {});
+window.addEventListener('load', function () {
+  if (document.querySelector('.news__slider')) {
+    mm.add('(min-width: 49em)', () => {
+      const slider = new Swiper('.news__slider', {
+        modules: [Navigation, Pagination],
+        slidesPerView: 'auto',
+        loop: true,
+        spaceBetween: remToPx(7.1),
+        navigation: {
+          prevEl: '.news__controls .controls__btn_prev',
+          nextEl: '.news__controls .controls__btn_next',
+        },
+        pagination: {
+          el: '.news__controls .controls__fraction',
+          type: 'custom',
+          renderCustom(swiper, current, total) {
+            return current + '//' + total;
+          },
+        },
+      });
+
+      return () => {
+        slider.destroy();
+      };
+    });
+  }
+});

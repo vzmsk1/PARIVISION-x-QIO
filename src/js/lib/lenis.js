@@ -15,10 +15,6 @@ export const lenis = new Lenis({
   infinite: false,
 });
 
-if (document.querySelector('.hero')) {
-  lenis.stop();
-}
-
 // Use requestAnimationFrame to continuously update the scroll
 function raf(time) {
   lenis.raf(time);

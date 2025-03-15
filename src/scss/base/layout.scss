@@ -19,6 +19,8 @@
 .homepage {
   height: 100dvh;
 
+  overflow: hidden;
+
   .blur {
     opacity: 0;
     filter: blur(0.3rem);
@@ -99,6 +101,50 @@
         bottom: -4rem;
       }
     }
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 2.5rem;
+
+  // .controls__btn
+
+  &__btn {
+    display: inline-flex;
+
+    svg {
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+    // .controls__btn_prev
+
+    &_prev {
+      transform: rotate(180deg);
+    }
+
+    // .controls__btn_next
+
+    &_next {
+    }
+  }
+
+  // .controls__fraction
+
+  &__fraction {
+  }
+}
+
+._hidden-scrollbar {
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
   }
 }
 

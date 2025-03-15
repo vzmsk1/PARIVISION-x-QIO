@@ -74,50 +74,114 @@
 						</div>
 					</div>
 				</section>
-				<section data-section="teams" class="teams">
-					<div class="teams__container container">
-						<ul class="teams__list">
-							<li class="teams__item item-teams">
-								<a href="#" class="item-teams__inner">
-									<div class="item-teams__logo">
-										<svg>
-											<use href="#cs2-svg"></use>
-										</svg>
+				<section data-section="news" class="news">
+					<div class="news__container container">
+						<div class="news__filters _hidden-scrollbar">
+							<div class="news__badge badge">
+								<div class="badge__inner">
+									<input type="radio" name="news-opt" class="badge__input" />
+									<span class="badge__txt">PRESS</span>
+								</div>
+							</div>
+							<div class="news__badge badge">
+								<div class="badge__inner">
+									<input type="radio" name="news-opt" class="badge__input" />
+									<span class="badge__txt">MEDIA</span>
+								</div>
+							</div>
+							<div class="news__badge badge">
+								<div class="badge__inner">
+									<input type="radio" name="news-opt" class="badge__input" />
+									<span class="badge__txt">ANNOUNCES</span>
+								</div>
+							</div>
+							<div class="news__badge badge">
+								<div class="badge__inner">
+									<input type="radio" name="news-opt" class="badge__input" />
+									<span class="badge__txt">SCHEDULE</span>
+								</div>
+							</div>
+							<div class="news__badge badge">
+								<div class="badge__inner">
+									<input type="radio" name="news-opt" class="badge__input" />
+									<span class="badge__txt">INTERVIEWS</span>
+								</div>
+							</div>
+							<div class="news__badge badge">
+								<div class="badge__inner">
+									<input type="radio" name="news-opt" class="badge__input" />
+									<span class="badge__txt">STREAMS</span>
+								</div>
+							</div>
+							<div class="news__badge badge">
+								<div class="badge__inner">
+									<input type="radio" name="news-opt" class="badge__input" />
+									<span class="badge__txt">OTHERS</span>
+								</div>
+							</div>
+						</div>
+						<div class="news__slider swiper">
+							<div class="news__wrapper swiper-wrapper">
+								<div class="news__slide news-card swiper-slide">
+									<a href="#" class="news-card__content">
+										<span class="news-card__heading">VR MULTIPLAYER COMPET IS STARTED</span>
+										<span class="news-card__date">DATE: 24_JAN_2025</span>
+									</a>
+									<div class="news-card__image-wrap">
+										<img src="img/content/PM1.webp" class="news-card__image" alt="" />
 									</div>
-									<div class="item-teams__bg">
-										<img src="img/content/2090007831.webp" alt="" class="item-teams__bg-content" />
+								</div>
+								<div class="news__slide news-card swiper-slide">
+									<a href="#" class="news-card__content">
+										<span class="news-card__heading">PARIVISION REAISED 5M$ AT MSI 2024</span>
+										<span class="news-card__date">DATE: 13_FEB_2025</span>
+									</a>
+									<div class="news-card__image-wrap">
+										<img src="img/content/2090007839.webp" class="news-card__image" alt="" />
 									</div>
-								</a>
-							</li>
-							<li class="teams__item item-teams">
-								<a href="#" class="item-teams__inner">
-									<div class="item-teams__cover">
-										<div class="item-teams__logo">
-											<svg>
-												<use href="#deadlock-svg"></use>
-											</svg>
-										</div>
+								</div>
+								<div class="news__slide news-card swiper-slide">
+									<a href="#" class="news-card__content">
+										<span class="news-card__heading">PARIVISION HOSTS TOURNAMENT FOR CS2</span>
+										<span class="news-card__date">DATE: 15_FEB_2025</span>
+									</a>
+									<div class="news-card__image-wrap">
+										<img src="img/content/2090007841.webp" class="news-card__image" alt="" />
 									</div>
-									<div class="item-teams__bg">
-										<img src="img/content/2090007832.webp" alt="" class="item-teams__bg-content" />
+								</div>
+								<div class="news__slide news-card swiper-slide">
+									<a href="#" class="news-card__content">
+										<span class="news-card__heading">PARIVISION HOSTS TOURNAMENT FOR CS2</span>
+										<span class="news-card__date">DATE: 15_FEB_2025</span>
+									</a>
+									<div class="news-card__image-wrap">
+										<img src="img/content/2090007833.webp" class="news-card__image" alt="" />
 									</div>
-								</a>
-							</li>
-							<li class="teams__item item-teams">
-								<a href="#" class="item-teams__inner">
-									<div class="item-teams__cover">
-										<div class="item-teams__logo">
-											<svg>
-												<use href="#dota2-svg"></use>
-											</svg>
-										</div>
+								</div>
+								<div class="news__slide news-card swiper-slide">
+									<a href="#" class="news-card__content">
+										<span class="news-card__heading">VR MULTIPLAYER COMPET IS STARTED</span>
+										<span class="news-card__date">DATE: 24_JAN_2025</span>
+									</a>
+									<div class="news-card__image-wrap">
+										<img src="img/content/PM1.webp" class="news-card__image" alt="" />
 									</div>
-									<div class="item-teams__bg">
-										<img src="img/content/12.webp" alt="" class="item-teams__bg-content" />
-									</div>
-								</a>
-							</li>
-						</ul>
+								</div>
+							</div>
+						</div>
+						<div class="news__controls controls">
+							<button type="button" class="controls__btn controls__btn_prev">
+								<svg>
+									<use href="#arr-svg"></use>
+								</svg>
+							</button>
+							<div class="controls__fraction"></div>
+							<button type="button" class="controls__btn controls__btn_next">
+								<svg>
+									<use href="#arr-svg"></use>
+								</svg>
+							</button>
+						</div>
 					</div>
 				</section>
 
@@ -212,25 +276,75 @@
 						</button>
 					</div>
 				</section>
+				<section data-section="teams" class="teams">
+					<div class="teams__container container">
+						<ul class="teams__list">
+							<li class="teams__item item-teams">
+								<a href="#" class="item-teams__inner">
+									<div class="item-teams__logo">
+										<svg>
+											<use href="#cs2-svg"></use>
+										</svg>
+									</div>
+									<div class="item-teams__bg">
+										<img src="img/content/2090007831.webp" alt="" class="item-teams__bg-content" />
+									</div>
+								</a>
+							</li>
+							<li class="teams__item item-teams">
+								<a href="#" class="item-teams__inner">
+									<div class="item-teams__cover">
+										<div class="item-teams__logo">
+											<svg>
+												<use href="#deadlock-svg"></use>
+											</svg>
+										</div>
+									</div>
+									<div class="item-teams__bg">
+										<img src="img/content/2090007832.webp" alt="" class="item-teams__bg-content" />
+									</div>
+								</a>
+							</li>
+							<li class="teams__item item-teams">
+								<a href="#" class="item-teams__inner">
+									<div class="item-teams__cover">
+										<div class="item-teams__logo">
+											<svg>
+												<use href="#dota2-svg"></use>
+											</svg>
+										</div>
+									</div>
+									<div class="item-teams__bg">
+										<img src="img/content/12.webp" alt="" class="item-teams__bg-content" />
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</section>
 
 				<section data-section="section"></section>
 			</main>
 			<div class="homepage-table">
 				<div class="homepage-table__container container">
-					<div class="homepage-table__bullets">
-						<span class="homepage-table__bullet"> </span>
-						<span class="homepage-table__bullet"> </span>
-						<span class="homepage-table__bullet"> </span>
-						<span class="homepage-table__bullet"> </span>
-						<span class="homepage-table__bullet"> </span>
-					</div>
+					<div class="homepage-table__bullets"></div>
 					<div class="homepage-table__info">
 						<span id="cur-time" class="homepage-table__info-txt"></span>
 						<span class="homepage-table__info-txt">[UTC +4]</span>
 					</div>
-					<a href="#" class="homepage-table__btn frame-btn">
+					<a href="#" class="homepage-table__btn homepage-table__btn_leaders frame-btn">
 						<span class="frame-btn__inner">
 							<span class="frame-btn__txt">READ FULL MANIFESTO</span>
+						</span>
+					</a>
+					<a href="#" class="homepage-table__btn homepage-table__btn_teams frame-btn">
+						<span class="frame-btn__inner">
+							<span class="frame-btn__txt">GO TO MEMBERS</span>
+						</span>
+					</a>
+					<a href="#" class="homepage-table__btn homepage-table__btn_news frame-btn">
+						<span class="frame-btn__inner">
+							<span class="frame-btn__txt">GO TO FULL LIST</span>
 						</span>
 					</a>
 					<ul class="homepage-table__list">

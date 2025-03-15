@@ -2,6 +2,7 @@
   position: relative;
 
   display: inline-flex;
+  justify-content: center;
 
   @media (max-width: 49em) {
     width: 100%;
@@ -11,23 +12,16 @@
   &::after,
   &__inner::before,
   &__inner::after {
-    content: '';
+    content: var(--i-border);
 
     position: absolute;
 
     width: 1.25rem;
     height: 1.25rem;
 
-    border: 1px solid var(--c-primary);
-    border-right: none;
-    border-bottom: none;
-    border-radius: 0.4rem;
-
     @media (max-width: 49em) {
-      width: 2rem;
-      height: 2rem;
-
-      border-radius: 0.6rem;
+      width: 2.2rem;
+      height: 2.2rem;
     }
   }
 
@@ -86,5 +80,81 @@
     @media (max-width: 49em) {
       padding: 2.2rem 2.4rem;
     }
+  }
+}
+
+.badge {
+  position: relative;
+
+  &::before,
+  &::after,
+  &__inner::before,
+  &__inner::after {
+    content: var(--i-border);
+
+    position: absolute;
+
+    width: 1.25rem;
+    height: 1.25rem;
+
+    @media (max-width: 49em) {
+      width: 2.2rem;
+      height: 2.2rem;
+    }
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+  }
+
+  &::after {
+    top: 0;
+    right: 0;
+
+    transform: scaleX(-1);
+  }
+
+  // .badge__inner
+
+  &__inner {
+    padding: 2.4rem;
+
+    display: inline-flex;
+    justify-content: center;
+
+    @media (max-width: 49em) {
+      padding: 5rem;
+    }
+
+    &::before {
+      bottom: 0;
+      left: 0;
+
+      transform: scaleY(-1);
+    }
+
+    &::after {
+      bottom: 0;
+      right: 0;
+
+      transform: scale(-1, -1);
+    }
+  }
+
+  // .badge__input
+
+  &__input {
+    position: absolute;
+    inset: 0;
+
+    appearance: none;
+  }
+
+  // .badge__txt
+
+  &__txt {
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 }

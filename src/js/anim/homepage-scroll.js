@@ -18,7 +18,6 @@ let leadersIdx = 0;
 const leaders = gsap.utils.toArray('.leaders__group');
 const table = document.querySelector('.homepage-table');
 const heading = document.getElementById('section-heading');
-const bullets = document.querySelectorAll('.homepage-table__bullet');
 export const sections = gsap.utils.toArray('[data-section]');
 
 const scroll = (self, i, deltaY) => {
@@ -95,23 +94,35 @@ export const observer = Observer.create({
   type: 'wheel,touch',
   wheelSpeed: isTouch ? -1 : 1,
   onUp: self => {
-    if (isTouch) {
-      down(self);
-    } else {
-      up(self);
+    if (
+      !self.event.target.closest('.menu') &&
+      !self.event.target.closest('.news__filters')
+    ) {
+      if (isTouch) {
+        down(self);
+      } else {
+        up(self);
+      }
     }
   },
   onDown: self => {
-    if (isTouch) {
-      up(self);
-    } else {
-      down(self);
+    if (
+      !self.event.target.closest('.menu') &&
+      !self.event.target.closest('.news__filters')
+    ) {
+      if (isTouch) {
+        up(self);
+      } else {
+        down(self);
+      }
     }
   },
 });
 observer.disable();
 
 export const resetActiveSection = (section, deltaY = -1) => {
+  const bullets = gsap.utils.toArray('.homepage-table__bullet');
+
   if (section) {
     const curIdx = sections.indexOf(section);
     const curBullet = bullets[curIdx];
@@ -147,14 +158,12 @@ export const resetActiveSection = (section, deltaY = -1) => {
         !section.classList.contains('about') &&
         !section.classList.contains('team')
       ) {
-        table.classList.add('_center');
         gsap.to('body', { '--opacity': 0 });
       } else {
-        table.classList.remove('_center');
         gsap.to('body', { '--opacity': 1 });
       }
     }
-
+    console.log(curBullet);
     if (bullets.length && curBullet) {
       removeClasses(bullets, ACTIVE_CLASS);
       curBullet.classList.add(ACTIVE_CLASS);
