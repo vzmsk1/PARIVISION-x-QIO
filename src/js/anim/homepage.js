@@ -1,8 +1,5 @@
 import gsap from 'gsap';
-import { ACTIVE_CLASS, resetActiveSection } from './homepage-scroll';
 import { isTouch } from '../utils/script';
-import { tlLeadersLeave, tlMain } from './timelines';
-import { Observer } from 'gsap/all';
 import { removeClasses } from '../utils/utils';
 
 export const list = document.querySelector('.homepage-table__list');
@@ -33,8 +30,8 @@ export const itemsTl = gsap
     '--mb': '2rem',
     '--opacity': 1,
     '--scale': 1,
-    duration: 0.5,
-    stagger: 0.3,
+    duration: 0.3,
+    stagger: 0.2,
   });
 
 export const initItemsAnim = () => {
@@ -56,20 +53,4 @@ export const initItemsAnim = () => {
   list.addEventListener('mouseout', function () {
     if (!isTouch) itemsTl.reverse();
   });
-};
-
-export const initHomepageAnim = () => {
-  document.documentElement.classList.add('homepage');
-
-  gsap.timeline().to('.homepage-table', { opacity: 1 }).to(
-    '.homepage-table',
-    {
-      filter: 'blur(0rem)',
-    },
-    0.8
-  );
-  tlMain.play();
-
-  document.querySelector('[data-section]').classList.add(ACTIVE_CLASS);
-  resetActiveSection(document.querySelector('[data-section]'));
 };

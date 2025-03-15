@@ -6,6 +6,10 @@
     flex-direction: column;
     justify-content: center;
 
+    .set-homepage-css & {
+      @extend %ob-t;
+    }
+
     @media (min-width: 49.01em) {
       &.container {
         padding-top: 0.4rem;

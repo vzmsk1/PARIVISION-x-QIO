@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="set-homepage-css">
 
 <head>
 	<title>HOMEPAGE</title>
@@ -54,7 +54,7 @@
 		<div class="wrapper">
 			<main class="main">
 				<section data-section="main" class="hero">
-					<div class="hero__container container blur-t">
+					<div class="hero__container container">
 						<div class="hero__top screen-txt">
 							<p class="hero__txt">
 								PARIVISION is an eSports organization with a global reach and the goal
@@ -77,9 +77,9 @@
 				<section data-section="about" class="about">
 					<div class="about__container container">
 						<h2 class="about__heading screen-heading">
-							<span class="about__heading-txt blur-t">WE CAN ONLY</span><span class="about__heading-txt blur-t">SPEAK ON</span><span class="about__heading-txt blur-t">THE LANGUAGE</span><span class="about__heading-txt blur-t">OF CONNECTIVITY</span>
+							<span class="about__heading-txt">WE CAN ONLY</span><span class="about__heading-txt">SPEAK ON</span><span class="about__heading-txt">THE LANGUAGE</span><span class="about__heading-txt">OF CONNECTIVITY</span>
 						</h2>
-						<div class="about__text-wrap screen-txt opacity-t">
+						<div class="about__text-wrap screen-txt">
 							<p class="about__text">
 								PARIVISION is an eSports organization with a global reach and the goal
 								of becoming No. 1 in the eSports arena.
@@ -94,16 +94,16 @@
 
 				<section data-section="team" class="team">
 					<div class="team__container container">
-						<div class="team__text-wrap screen-txt opacity-t">
+						<div class="team__text-wrap screen-txt">
 							<p class="team__txt">
 								PARIVISION is an eSports organization with a global reach and the goal
 								of becoming No. 1
 							</p>
 						</div>
-						<h2 class="team__heading screen-heading blur">
-							GREATEST <span>TOP TEAM</span>
+						<h2 class="team__heading screen-heading">
+							<span>GREATEST</span> <span>TOP TEAM</span>
 						</h2>
-						<div class="team__text-wrap screen-txt opacity-t _desktop-only">
+						<div class="team__text-wrap screen-txt _desktop-only">
 							<p class="team__txt">
 								Founded in 2023 in Belgrade, our team brings together talents.
 							</p>
@@ -117,7 +117,7 @@
 				<section data-section="leaders" class="leaders">
 					<div class="leaders__container container">
 						<div class="leaders__content">
-							<div class="leaders__group leaders__group_center opacity">
+							<div class="leaders__group leaders__group_center">
 								<div class="leaders__images-wrap">
 									<div class="leaders__image-wrap">
 										<img src="img/content/2090007847.webp" class="leaders__image" alt="" />
@@ -147,7 +147,7 @@
 									</div>
 								</div>
 							</div>
-							<h2 class="leaders__group-heading leaders__group-heading_main screen-heading blur-t">
+							<h2 class="leaders__group-heading leaders__group-heading_main screen-heading">
 								<span>PARIVISION</span> <span>PRINCIPLES</span>
 							</h2>
 							<span class="leaders__group-heading">connection</span>
@@ -450,13 +450,39 @@
 					</div>
 				</footer>
 
-				<section data-section="section"></section>
 			</main>
+			<div id="loader" class="preloader">
+				<div class="preloader__container container">
+					<div class="preloader__row">
+						<span class="preloader__progress">99</span>
+						<div class="homepage-table__info">
+							<span data-cur-time class="homepage-table__info-txt"></span>
+							<span class="homepage-table__info-txt">[UTC +4]</span>
+						</div>
+						<span class="preloader__progress">99</span>
+					</div>
+					<div class="preloader__video">
+						<span class="preloader__progress">99</span>
+						<video data-videojs src="/files/Pre-comp8.mp4"></video>
+						<span class="preloader__progress">99</span>
+					</div>
+					<div class="preloader__row">
+						<span class="preloader__progress">99</span>
+						<div class="preloader__loading frame-btn border">
+							<span class="frame-btn__inner border__inner">
+								<span class="frame-btn__txt">loading</span>
+							</span>
+						</div>
+						<span class="preloader__progress">99</span>
+					</div>
+				</div>
+			</div>
+
 			<div class="homepage-table">
 				<div class="homepage-table__container container">
 					<div class="homepage-table__bullets"></div>
 					<div class="homepage-table__info">
-						<span id="cur-time" class="homepage-table__info-txt"></span>
+						<span data-cur-time class="homepage-table__info-txt"></span>
 						<span class="homepage-table__info-txt">[UTC +4]</span>
 					</div>
 					<a href="#" class="homepage-table__btn homepage-table__btn_leaders frame-btn border">
@@ -530,6 +556,9 @@
 						</li>
 					</ul>
 				</div>
+			</div>
+			<div class="homepage-video">
+				<video id="homepage-video-1" src="/files/ProfessionalModeMorphVideo.mp4" data-videojs></video>
 			</div>
 
 			<svg display="none">

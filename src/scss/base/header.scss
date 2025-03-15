@@ -6,6 +6,10 @@
 
   width: 100%;
 
+  .set-homepage-css & {
+    @extend %blur;
+  }
+
   &::after {
     content: '';
 
@@ -73,6 +77,8 @@
     left: 50%;
 
     transform: translateX(-50%);
+
+    @extend %opacity;
 
     @media (min-width: 49.01em) {
       position: static;

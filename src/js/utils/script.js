@@ -4,20 +4,12 @@ import { initHomepageAnim, itemsTl } from '../anim/homepage';
 import { initWatchTimer, isTouchDevice } from './utils';
 import { sections } from '../anim/homepage-scroll';
 import { lenis } from '../lib/lenis';
+import { checkScreenSize, initHomepageBullets } from './homepage';
+import { tlPreloader } from '../anim/timelines';
 
 export const mm = gsap.matchMedia();
 export const md = window.matchMedia('(max-width: 49em)');
 export const isTouch = isTouchDevice();
-
-const checkScreenSize = () => {
-  const div = md.matches ? 0.6 : 2;
-
-  if (window.screen.availWidth / window.screen.availHeight >= div) {
-    document.documentElement.classList.add('_hf');
-  } else {
-    document.documentElement.classList.remove('_hf');
-  }
-};
 
 document.addEventListener('DOMContentLoaded', function () {
   if (document.querySelectorAll('[data-current-year]').length) {
@@ -60,21 +52,13 @@ window.addEventListener('load', function () {
   // window.scrollTo(0, 0);
 
   if (document.querySelector('.hero')) {
+    document.documentElement.classList.add('homepage');
+
     lenis.destroy();
 
-    initHomepageAnim();
+    tlPreloader.play();
     checkScreenSize();
-
-    if (sections.length) {
-      for (let i = 0; i < sections.length; i++) {
-        const bullet = document.createElement('span');
-
-        bullet.classList.add('homepage-table__bullet');
-        document.querySelector('.homepage-table__bullets').append(bullet);
-
-        if (i === 0) bullet.classList.add('_is-active');
-      }
-    }
+    initHomepageBullets();
 
     window.addEventListener('resize', checkScreenSize);
   }

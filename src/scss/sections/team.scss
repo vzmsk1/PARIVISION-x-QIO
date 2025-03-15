@@ -35,6 +35,10 @@
   &__txt {
     max-width: 55.1rem;
 
+    .set-homepage-css & {
+      @extend %o-t;
+    }
+
     @media (min-width: 49.01em) {
       max-width: 29rem;
 
@@ -49,6 +53,12 @@
   &__heading {
     display: flex;
     justify-content: space-between;
+
+    span {
+      .set-homepage-css & {
+        @extend %ob-t;
+      }
+    }
 
     @media (max-width: 49em) {
       flex-direction: column;

@@ -1,13 +1,23 @@
 import gsap from 'gsap';
-import { initItemsAnim, initLeadersScreenObserver, itemsTl } from './homepage';
+import { initItemsAnim, itemsTl } from './homepage';
 import {
+  ACTIVE_CLASS,
   ANIMATING_CLASS,
   INIT_SCROLL_CLASS,
   initHomepageScroll,
   observer,
+  resetActiveSection,
   sections,
 } from './homepage-scroll';
+import videojs from 'video.js';
+import { defaults } from 'lodash';
 
+export const duration = 1.5;
+
+const preloaderVideo = videojs.getPlayer(
+  document.querySelector('.preloader [data-videojs]')
+);
+const video1 = document.getElementById('homepage-video-1');
 const table = document.querySelector('.homepage-table');
 const sectionMain = document.querySelector('[data-section="main"]');
 const sectionAbout = document.querySelector('[data-section="about"]');
@@ -25,16 +35,19 @@ const clearedProps = {
 };
 const blurTopProps = {
   opacity: 0,
-  filter: 'blur(0.3rem)',
-  translateY: '-14rem',
+  filter: 'blur(1rem)',
+  translateY: '-10%',
 };
 const opacityTopProps = {
   opacity: 0,
-  translateY: '-14rem',
+  translateY: '-10%',
 };
 
 const onDefaults = {
-  duration: 0.5,
+  defaults: {
+    duration: 1.5,
+    ease: 'circ.inOut',
+  },
   paused: true,
   onComplete: () => {
     document.documentElement.classList.remove(ANIMATING_CLASS);
@@ -42,13 +55,96 @@ const onDefaults = {
   },
 };
 const offDefaults = {
-  duration: 0.5,
+  defaults: onDefaults.defaults,
   paused: true,
   onStart: () => {
     document.documentElement.classList.add(ANIMATING_CLASS);
     observer.disable();
   },
 };
+
+export const tlPreloader = gsap.timeline({
+  paused: true,
+  defaults: onDefaults.defaults,
+});
+export const tlPreloaderLeave = gsap.timeline({
+  ...offDefaults,
+});
+const hideLoader = () => {
+  document.querySelectorAll('.preloader__progress') &&
+    document.querySelectorAll('.preloader__progress').forEach(el => {
+      el.textContent = 100;
+    });
+  tlPreloaderLeave.play();
+};
+tlPreloader
+  .to(
+    'html',
+    {
+      '--opacity': 1,
+      duration,
+    },
+    0
+  )
+  .to(
+    '.preloader',
+    {
+      opacity: 1,
+      duration,
+    },
+    0
+  )
+  .to(
+    '.preloader',
+    {
+      '--y': 0,
+      '--opacity': 1,
+      '--blur': '0rem',
+      duration,
+      onStart: () => {
+        gsap.from('.preloader__progress', {
+          textContent: 0,
+          duration: 3,
+          snap: { textContent: 1 },
+          onComplete: () => {
+            if (document.querySelector('._page-loaded')) {
+              hideLoader();
+            } else {
+              window.addEventListener('load', hideLoader);
+            }
+          },
+        });
+      },
+      onComplete: () => {
+        preloaderVideo && preloaderVideo.play();
+      },
+    },
+    0.5
+  );
+tlPreloaderLeave.to('.preloader__video, #loader', {
+  opacity: 0,
+  duration: 0.5,
+  onStart: () => {
+    gsap.to('.homepage-table, .header', { opacity: 1 });
+    gsap.to('.homepage-table, .header', {
+      filter: 'blur(0rem)',
+      delay: 0.5,
+      onComplete: () => {
+        gsap.to('.header__heading', { opacity: 1 });
+
+        document.querySelector('[data-section]').classList.add(ACTIVE_CLASS);
+        resetActiveSection(document.querySelector('[data-section]'));
+
+        tlMain.play();
+      },
+    });
+  },
+  onComplete: () => {
+    preloaderVideo && preloaderVideo.pause();
+
+    document.getElementById('loader').style.display = 'none';
+  },
+});
 
 export const tlMain = gsap.timeline({
   ...onDefaults,
@@ -58,23 +154,24 @@ export const tlMainLeave = gsap.timeline({
   ...offDefaults,
   id: `${sections.indexOf(sectionMain)}-off`,
 });
-tlMain.to('.hero__container', {
-  duration: 1.5,
-  ...clearedProps,
-  onComplete: () => {
-    if (!document.querySelector(`.${INIT_SCROLL_CLASS}`)) {
-      itemsTl.play();
-      itemsTl.then(() => {
-        initHomepageScroll();
+tlMain
+  .to('.hero__container', {
+    ...clearedProps,
+    onComplete: () => {
+      if (!document.querySelector(`.${INIT_SCROLL_CLASS}`)) {
+        itemsTl.play();
+        itemsTl.then(() => {
+          initHomepageScroll();
 
-        setTimeout(() => {
-          itemsTl.reverse();
-          itemsTl.then(initItemsAnim);
-        }, 3000);
-      });
-    }
-  },
-});
+          setTimeout(() => {
+            itemsTl.reverse();
+            itemsTl.then(initItemsAnim);
+          }, 2000);
+        });
+      }
+    },
+  })
+  .to('body', { '--opacity': 1 }, 0);
 tlMainLeave.to('.hero__container', blurTopProps);
 
 export const tlAbout = gsap.timeline({
@@ -87,9 +184,18 @@ export const tlAboutLeave = gsap.timeline({
 });
 tlAbout
   .to('.about__heading-txt:first-child, .about__heading-txt:nth-child(2)', {
-    ...clearedProps,
-    duration: 1.5,
+    duration: 1,
+    opacity: 1,
+    translateY: 0,
   })
+  .to(
+    '.about__heading-txt:first-child, .about__heading-txt:nth-child(2)',
+    {
+      filter: 'blur(0rem)',
+      duration: 1,
+    },
+    0.5
+  )
   .to(
     '.about__text-wrap',
     clearedProps,
@@ -99,12 +205,42 @@ tlAbout
   .to(
     '.about__heading-txt:nth-child(3), .about__heading-txt:nth-child(4)',
     {
-      ...clearedProps,
-      stagger: 0.3,
+      duration: 1,
+      opacity: 1,
+      translateY: 0,
+      stagger: 0.1,
     },
-    0.8
+    0.5
+  )
+  .to(
+    '.about__heading-txt:nth-child(3), .about__heading-txt:nth-child(4)',
+    {
+      filter: 'blur(0rem)',
+      duration: 1,
+      stagger: 0.2,
+    },
+    1
+  )
+  .to(
+    '#homepage-video-1 video',
+    {
+      opacity: 1,
+    },
+    0.7
+  )
+  .to(
+    'html',
+    {
+      '--opacity': 0,
+    },
+    0.7
   );
-tlAboutLeave.to('.about__container', blurTopProps);
+tlAboutLeave.to('.about__heading, .about__text-wrap', {
+  ...blurTopProps,
+  onStart: () => {
+    videojs.getPlayer(video1) && videojs.getPlayer(video1).play();
+  },
+});
 
 export const tlTeam = gsap.timeline({
   ...onDefaults,
@@ -114,10 +250,22 @@ export const tlTeamLeave = gsap.timeline({
   ...offDefaults,
   id: `${sections.indexOf(sectionTeam)}-off`,
 });
-tlTeam.to('.team__text-wrap, .team__heading', clearedProps);
+tlTeam
+  .to('.team__heading span', {
+    opacity: 1,
+    translateY: 0,
+    duration: 1,
+    stagger: 0.1,
+  })
+  .to(
+    '.team__heading span',
+    { filter: 'blur(0rem)', stagger: 0.1, duration: 1 },
+    0.3
+  )
+  .to('.team__txt', clearedProps, 0);
 tlTeamLeave
-  .to('.team__heading', blurTopProps)
-  .to('.team__text-wrap', opacityTopProps, 0);
+  .to('.team__heading span', blurTopProps)
+  .to('.team__txt', opacityTopProps, 0);
 
 export const tlLeaders = gsap.timeline({
   ...onDefaults,

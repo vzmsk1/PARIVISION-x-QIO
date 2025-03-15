@@ -2,6 +2,9 @@
   // .about__container
 
   &__container {
+    position: relative;
+    z-index: 2;
+
     display: flex;
     flex-direction: column-reverse;
     row-gap: 22rem;
@@ -39,6 +42,10 @@
   // .about__heading-txt
 
   &__heading-txt {
+    .set-homepage-css & {
+      @extend %ob-t;
+    }
+
     @media (min-width: 49.01em) {
       &:first-child {
         margin-right: 72.5rem;
@@ -68,6 +75,10 @@
   &__text-wrap {
     display: flex;
     justify-content: space-between;
+    .set-homepage-css & {
+      opacity: 0;
+      transform: translateY(20%);
+    }
   }
 
   // .about__text
@@ -88,6 +99,18 @@
       &:last-child {
         max-width: 28.7rem;
       }
+    }
+  }
+}
+
+.homepage-video {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+
+  video {
+    .set-homepage-css & {
+      @extend %opacity;
     }
   }
 }

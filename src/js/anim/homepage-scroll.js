@@ -1,7 +1,7 @@
 import gsap from 'gsap';
 import { Observer } from 'gsap/all';
 import { isTouchDevice, removeClasses } from '../utils/utils';
-import { timelines } from './timelines';
+import { timelines, duration } from './timelines';
 import { headings, initLeadersScreenObserver } from './homepage';
 
 gsap.registerPlugin(Observer);
@@ -137,40 +137,33 @@ export const resetActiveSection = (section, deltaY = -1) => {
       }
       prevTl.revert();
     };
-    if (prevIdx >= 0 && document.querySelector(`.${INIT_SCROLL_CLASS}`)) {
-      const curTl = timelines.filter(tl => tl.vars.id === `${prevIdx}-off`)[0];
 
-      curTl.restart();
-      curTl.then(() => {
-        transition(curTl);
-      });
-    }
+    if (section.dataset.section !== 'leaders') {
+      if (prevIdx >= 0 && document.querySelector(`.${INIT_SCROLL_CLASS}`)) {
+        const curTl = timelines.filter(
+          tl => tl.vars.id === `${prevIdx}-off`
+        )[0];
 
-    document.documentElement.classList.add(ANIMATING_CLASS);
-
-    yPos = deltaY === 1 ? yPos + 16 : yPos - 16;
-
-    gsap.to('body', { '--y': `${yPos}rem`, duration: 2 });
-
-    if (table) {
-      if (
-        !section.classList.contains('hero') &&
-        !section.classList.contains('about') &&
-        !section.classList.contains('team')
-      ) {
-        gsap.to('body', { '--opacity': 0 });
-      } else {
-        gsap.to('body', { '--opacity': 1 });
+        curTl.restart();
+        curTl.then(() => {
+          transition(curTl);
+        });
       }
-    }
-    console.log(curBullet);
-    if (bullets.length && curBullet) {
-      removeClasses(bullets, ACTIVE_CLASS);
-      curBullet.classList.add(ACTIVE_CLASS);
-    }
 
-    if (heading) {
-      heading.innerHTML = section.dataset.section;
+      document.documentElement.classList.add(ANIMATING_CLASS);
+
+      yPos = deltaY === 1 ? yPos - 16 : yPos + 16;
+
+      gsap.to('.homepage', { '--y': `${yPos}rem`, duration });
+
+      if (bullets.length && curBullet) {
+        removeClasses(bullets, ACTIVE_CLASS);
+        curBullet.classList.add(ACTIVE_CLASS);
+      }
+
+      if (heading) {
+        heading.innerHTML = section.dataset.section;
+      }
     }
   }
 };

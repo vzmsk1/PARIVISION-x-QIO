@@ -6,7 +6,7 @@ videos.forEach(video => {
     video,
     {
       autoplay: false,
-      loop: true,
+      loop: video.closest('.preloader'),
       muted: true,
       playsinline: true,
       normalizeAutoplay: true,

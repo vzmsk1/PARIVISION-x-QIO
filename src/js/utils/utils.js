@@ -13,33 +13,33 @@ export const isTouchDevice = () => {
 };
 
 export const initWatchTimer = () => {
-  if (document.getElementById('cur-time')) {
-    const el = document.getElementById('cur-time');
+  if (document.querySelectorAll('[data-cur-time]').length) {
+    document.querySelectorAll('[data-cur-time]').forEach(el => {
+      const init = () => {
+        const today = new Date();
+        let hr = today.getHours();
+        let min = today.getMinutes();
+        let sec = today.getSeconds();
 
-    const init = () => {
-      const today = new Date();
-      let hr = today.getHours();
-      let min = today.getMinutes();
-      let sec = today.getSeconds();
+        if (hr < 10) {
+          hr = '0' + hr;
+        }
+        if (min < 10) {
+          min = '0' + min;
+        }
+        if (sec < 10) {
+          sec = '0' + sec;
+        }
 
-      if (hr < 10) {
-        hr = '0' + hr;
-      }
-      if (min < 10) {
-        min = '0' + min;
-      }
-      if (sec < 10) {
-        sec = '0' + sec;
-      }
-
-      el.innerHTML = `
+        el.innerHTML = `
       ${hr + ' : '}
       ${min + ' : '}
       ${sec}
     `;
-    };
+      };
 
-    setInterval(init, 500);
+      setInterval(init, 500);
+    });
   }
 };
 
