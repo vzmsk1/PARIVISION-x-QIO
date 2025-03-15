@@ -1,6 +1,4 @@
 .news {
-  z-index: 1;
-
   @media (min-width: 49.01em) {
     &::after {
       content: '';
