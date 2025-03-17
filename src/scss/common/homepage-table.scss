@@ -6,6 +6,10 @@
 
   width: 100%;
 
+  .frame-btn {
+    margin: 0 auto;
+  }
+
   &._is-hidden {
     pointer-events: none;
   }
@@ -18,6 +22,22 @@
     padding-bottom: 1rem;
 
     bottom: 4rem;
+
+    &::after {
+      content: '';
+
+      position: absolute;
+      bottom: -2rem;
+      left: 50%;
+
+      width: 95%;
+      height: 1.5rem;
+
+      background: url(../img/vectors/2131327207.svg) center / contain no-repeat;
+      background-repeat: repeat-x;
+
+      transform: translate(-50%, 50%);
+    }
   }
 
   // .homepage-table__container
@@ -35,10 +55,7 @@
       grid-template-columns: 11.9fr 9fr 4fr;
       align-items: end;
 
-      ._teams-btn &,
-      ._leaders-btn &,
-      ._news-btn &,
-      ._contacts-btn & {
+      [data-table-section] & {
         grid-template-columns: 10fr 5fr 10fr;
       }
 
@@ -69,7 +86,7 @@
     border: 1px solid var(--c-primary);
     border-radius: 0.2rem;
 
-    transition: height 0.4s ease-in-out, background-color 0.4s ease-in-out 0.4s;
+    transition: height 0.4s ease-in-out, background-color 0.4s ease-in-out;
 
     &._is-active {
       height: 6.4rem;
@@ -83,22 +100,22 @@
   &__btn {
     &.frame-btn {
       display: none;
-      ._teams-btn & {
+      [data-table-section='teams'] & {
         &.homepage-table__btn_teams {
           display: inline-flex;
         }
       }
-      ._leaders-btn & {
+      [data-table-section='leaders'] & {
         &.homepage-table__btn_leaders {
           display: inline-flex;
         }
       }
-      ._news-btn & {
+      [data-table-section='news'] & {
         &.homepage-table__btn_news {
           display: inline-flex;
         }
       }
-      ._contacts-btn & {
+      [data-table-section='contacts'] & {
         &.homepage-table__btn_contacts {
           display: inline-flex;
         }
@@ -111,10 +128,7 @@
   &__info {
     padding-bottom: 0.6rem;
 
-    ._teams-btn &,
-    ._leaders-btn &,
-    ._news-btn &,
-    ._contacts-btn & {
+    [data-table-section] & {
       display: none;
     }
 
@@ -144,10 +158,7 @@
     @media (max-width: 49em) {
       width: 100%;
 
-      ._teams-btn &,
-      ._leaders-btn &,
-      ._news-btn &,
-      ._contacts-btn & {
+      [data-table-section] & {
         display: none;
       }
     }

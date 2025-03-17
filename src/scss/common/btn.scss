@@ -4,6 +4,34 @@
   display: inline-flex;
   justify-content: center;
 
+  @media (any-hover: hover) {
+    &:hover {
+      .border {
+        width: 106%;
+        height: 96%;
+      }
+    }
+  }
+
+  .border {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    width: 128.5%;
+    height: 100%;
+
+    transform: translate(-50%, -50%);
+
+    pointer-events: none;
+
+    transition: width 0.4s ease-in-out, height 0.4s ease;
+
+    @media (max-width: 49em) {
+      width: 98%;
+    }
+  }
+
   &.homepage-table__btn_contacts {
     .frame-btn__txt {
       @media (min-width: 49.01em) {
@@ -23,7 +51,6 @@
     align-items: center;
     justify-content: center;
     height: 6.3rem;
-    min-width: 38.6rem;
 
     @media (max-width: 49em) {
       height: 12.4rem;

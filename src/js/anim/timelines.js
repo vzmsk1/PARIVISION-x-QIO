@@ -277,6 +277,8 @@ tlTeam
     stagger: 0.1,
     onStart: () => {
       // player2 && player2.currentTime(0);
+
+      table && table.removeAttribute('data-table-section');
     },
   })
   .to(
@@ -329,7 +331,7 @@ tlLeaders
 
       // gsap.timeline().to('#homepage-video-2', { opacity: 1, duration: 1.5 });
 
-      table && table.classList.add('_leaders-btn');
+      table && (table.dataset.tableSection = 'leaders');
 
       setTimeout(() => {
         if (!document.querySelector('.leaders__group._is-visible')) {
@@ -353,9 +355,6 @@ tlLeadersLeave
         // gsap.timeline().to('#homepage-video-1', { opacity: 1, delay: 1 });
       }
     },
-    onComplete: () => {
-      table && table.classList.remove('_leaders-btn');
-    },
   })
   .to('.leaders', { '--opacity': 0 }, 0);
 
@@ -376,7 +375,7 @@ tlTeams
       visibility: 'visible',
       stagger: 0.3,
       onStart: () => {
-        table && table.classList.add('_teams-btn');
+        table && (table.dataset.tableSection = 'teams');
       },
     },
     0
@@ -401,9 +400,6 @@ tlTeams
 tlTeamsLeave
   .to('.teams', {
     '--opacity': 0,
-    onComplete: () => {
-      table && table.classList.remove('_teams-btn');
-    },
   })
   .to(
     '.item-teams',
@@ -431,7 +427,7 @@ tlNews
     '--opacity': 1,
     duration: 1,
     onStart: () => {
-      table && table.classList.add('_news-btn');
+      table && (table.dataset.tableSection = 'news');
     },
   })
   .to(
@@ -444,9 +440,6 @@ tlNews
   .to('.news__slider', { opacity: 1, visibility: 'visible', translateY: 0 }, 0);
 tlNewsLeave.to('.news__container', {
   ...blurTopProps,
-  onComplete: () => {
-    table && table.classList.remove('_news-btn');
-  },
 });
 
 export const tlContacts = gsap.timeline({
@@ -460,14 +453,11 @@ export const tlContactsLeave = gsap.timeline({
 tlContacts.to('.contacts__container', {
   ...clearedProps,
   onStart: () => {
-    table && table.classList.add('_contacts-btn');
+    table && (table.dataset.tableSection = 'contacts');
   },
 });
 tlContactsLeave.to('.contacts__container', {
   ...blurTopProps,
-  onComplete: () => {
-    table && table.classList.remove('_contacts-btn');
-  },
 });
 
 export const tlLinks = gsap.timeline({

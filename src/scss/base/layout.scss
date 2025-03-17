@@ -35,6 +35,8 @@
     width: 1.25rem;
     height: 1.25rem;
 
+    transition: transform 0.4s ease-in-out;
+
     @media (max-width: 49em) {
       width: 2.2rem;
       height: 2.2rem;
@@ -91,12 +93,11 @@
     background-position: center var(--y);
     background-size: contain;
     background-repeat: repeat;
-    background-attachment: fixed;
 
     opacity: var(--opacity);
 
     @media (max-width: 49em) {
-      background-size: cover;
+      background-image: url(@img/vectors/bg-m.svg);
     }
   }
 
