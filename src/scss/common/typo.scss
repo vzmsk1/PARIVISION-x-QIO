@@ -9,7 +9,7 @@
 
 .h-x {
   font: var(--txt-x);
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.05rem;
   text-transform: uppercase;
 }
 
@@ -21,6 +21,7 @@
 
 .screen-txt {
   font: var(--txt-s);
+  line-height: 133%;
 
   opacity: 0.7;
 }

@@ -95,11 +95,11 @@
   &__lang {
     position: absolute;
     top: 2.1rem;
-    left: 50%;
+    left: 49.6%;
 
     display: flex;
     align-items: center;
-    column-gap: 0.2rem;
+    column-gap: 0.1rem;
 
     transform: translateX(-50%);
 
@@ -114,7 +114,7 @@
     position: relative;
 
     display: flex;
-    column-gap: 0.2rem;
+    column-gap: 0.1rem;
 
     &:not(:last-child) {
       &::after {
@@ -162,10 +162,10 @@
   &__nav-item {
     display: flex;
     justify-content: center;
-    min-width: 7.6rem;
+    min-width: 7.5rem;
 
     font: var(--txt-medium-hf);
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.05rem;
     text-transform: uppercase;
   }
 
@@ -177,7 +177,7 @@
     border-radius: 0.4rem;
 
     font: var(--txt-medium-hf);
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.02rem;
     color: var(--c-bg);
     text-transform: uppercase;
 

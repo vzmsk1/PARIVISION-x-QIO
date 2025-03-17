@@ -7,6 +7,10 @@
     justify-content: center;
     row-gap: 12.2rem;
 
+    &.container {
+      padding-top: 0.2rem;
+    }
+
     @media (max-width: 49em) {
       justify-content: space-between;
 
@@ -33,24 +37,31 @@
   // .team__txt
 
   &__txt {
-    max-width: 55.1rem;
+    max-width: 50.1rem;
 
     .set-homepage-css & {
-      @extend %o-t;
+      opacity: 0;
+      transform: translateY(100%);
     }
 
     @media (min-width: 49.01em) {
-      max-width: 29rem;
+      max-width: 29.9rem;
 
       &:first-child:last-child {
         margin-left: auto;
       }
+    }
+
+    @media (max-width: 49em) {
+      line-height: 131%;
     }
   }
 
   // .team__heading
 
   &__heading {
+    padding-right: 1.5rem;
+
     display: flex;
     justify-content: space-between;
 
@@ -61,12 +72,17 @@
     }
 
     @media (max-width: 49em) {
+      margin: 0 auto;
+      padding-right: 0;
+
       flex-direction: column;
       row-gap: 1.2rem;
       max-width: 86rem;
+      width: inherit;
 
-      span {
+      span:last-child:not(:first-child) {
         margin-left: auto;
+        margin-right: 0.7rem;
       }
     }
   }

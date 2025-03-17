@@ -7,6 +7,7 @@ export const headings = gsap.utils.toArray('.leaders__group-heading');
 
 export const initLeadersScreenObserver = (self, leaders, leadersIdx) => {
   self.disable();
+  document.documentElement.classList.add('_is-animating');
 
   leaders[leadersIdx] && leaders[leadersIdx].classList.add('_is-visible');
   if (headings[leadersIdx]) {
@@ -14,13 +15,14 @@ export const initLeadersScreenObserver = (self, leaders, leadersIdx) => {
     headings[leadersIdx].classList.add('_is-active');
   }
   if (isTouch && leadersIdx !== 0) {
-    gsap.to('.leaders__group_center', { opacity: 0, translateY: '8rem' });
+    gsap.to('#homepage-video-2 video', { opacity: 0, translateY: '8rem' });
   } else {
-    gsap.to('.leaders__group_center', { opacity: 1, translateY: 0 });
+    gsap.to('#homepage-video-2 video', { opacity: 1, translateY: 0 });
   }
 
   setTimeout(() => {
     self.enable();
+    document.documentElement.classList.remove('_is-animating');
   }, 1000);
 };
 

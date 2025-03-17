@@ -1,9 +1,61 @@
 .contacts {
+  .border {
+    &::before {
+      top: -0.1rem;
+      left: -0.6rem;
+
+      @media (max-width: 49em) {
+        top: -0.3rem;
+        left: -1.3rem;
+      }
+    }
+    &::after {
+      top: -0.1rem;
+      right: -0.6rem;
+
+      @media (max-width: 49em) {
+        top: -0.3rem;
+        right: -1.3rem;
+      }
+    }
+    &__inner {
+      &::before {
+        bottom: -0.1rem;
+        left: -0.6rem;
+
+        @media (max-width: 49em) {
+          bottom: -0.3rem;
+          left: -1.3rem;
+        }
+      }
+      &::after {
+        bottom: -0.1rem;
+        right: -0.6rem;
+
+        @media (max-width: 49em) {
+          bottom: -0.3rem;
+          right: -1.3rem;
+        }
+      }
+    }
+  }
   // .contacts__container
 
   &__container {
     display: flex;
     flex-direction: column;
+
+    .set-homepage-css & {
+      @extend %ob-t;
+    }
+
+    @media (min-width: 49.01em) and (min-height: 600px) {
+      &.container {
+        &:not(._hf &, ._small-screen &) {
+          justify-content: center;
+        }
+      }
+    }
 
     &.container {
       padding-top: 14rem;
@@ -22,13 +74,13 @@
     display: flex;
     justify-content: space-between;
 
+    letter-spacing: 0.2rem;
+
     @media (max-width: 49em) {
       margin-bottom: 11.4rem;
 
-      &:not(._hf &) {
-        flex-direction: column;
-      }
-      row-gap: 0.4rem;
+      flex-direction: column;
+      row-gap: 1rem;
 
       span:last-child {
         margin-left: auto;
@@ -40,6 +92,10 @@
 
   &__heading-txt {
     white-space: nowrap;
+
+    @media (max-width: 49em) {
+      letter-spacing: 0.1rem;
+    }
   }
 
   // .contacts__form
@@ -47,23 +103,29 @@
   &__form {
     display: flex;
     flex-direction: column;
-    row-gap: 3vh;
+    row-gap: 8.3vh;
 
     @media (max-width: 49em) {
-      row-gap: 11.6rem;
+      row-gap: 12.6rem;
     }
     @media (max-width: 450px) and (max-height: 850px) {
       row-gap: 4.6rem;
+    }
+    @media (min-width: 49.01em) {
+      ._small-screen &,
+      ._hf & {
+        row-gap: 4.3vh;
+      }
     }
   }
 
   // .contacts__body
 
   &__body {
-    padding: 0.5rem;
+    padding: 0.7rem 0;
 
     @media (max-width: 49em) {
-      padding: 1rem;
+      padding: 0.3rem 0rem;
     }
   }
 
@@ -71,7 +133,7 @@
 
   &__fields {
     display: grid;
-    row-gap: 2rem;
+    row-gap: 1.7rem;
 
     @media (min-width: 49.01em) {
       grid-template-columns: repeat(2, 1fr);

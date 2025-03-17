@@ -17,13 +17,11 @@ html {
   user-select: none;
 
   &.homepage._hf {
-    font-size: 1.06vh;
-
-    @media (max-width: 49em) {
-      font-size: 0.69vh;
-    }
+    font-size: 0.54vh;
 
     @media (min-width: 49.01em) {
+      font-size: 1.06vh;
+
       body::after {
         background: url(@img/vectors/2131327187.svg) center 40% / 100% auto
           no-repeat;

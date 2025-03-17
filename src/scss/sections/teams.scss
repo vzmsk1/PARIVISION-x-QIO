@@ -1,4 +1,6 @@
 .teams {
+  --opacity: 0;
+
   &::before,
   &::after,
   &__container::before,
@@ -9,6 +11,10 @@
 
     width: 2.6rem;
     height: 22.4rem;
+
+    .set-homepage-css & {
+      opacity: var(--opacity);
+    }
 
     @media (max-width: 49em) {
       width: 4.52rem;
@@ -44,7 +50,7 @@
     align-items: flex-start;
 
     &.container {
-      padding-top: 24rem;
+      padding-top: 12.9vh;
     }
 
     @media (min-width: 49.01em) {
@@ -96,14 +102,30 @@
   // .teams__item
 
   &__item {
-    .homepage & {
-      opacity: 0;
-      filter: blur(0.3rem);
-    }
   }
 }
 
 .item-teams {
+  --opacity: 0;
+  --blur: 3rem;
+  --skew1: 1deg;
+  --skew2: 1deg;
+
+  &:first-child {
+    .item-teams__logo {
+      transform: translate(-50%, -50%) scaleY(0.6) skewX(var(--skew1));
+    }
+  }
+  &:last-child {
+    .item-teams__logo {
+      transform: translate(-50%, -50%) scaleY(0.6) skewX(var(--skew2));
+    }
+  }
+
+  .set-homepage-css & {
+    visibility: hidden;
+  }
+
   @media (min-width: 49.01em) {
     padding: 1.3rem;
   }
@@ -115,6 +137,11 @@
     width: 1.6rem;
     height: 1.6rem;
 
+    .set-homepage-css & {
+      opacity: var(--opacity);
+      filter: blur(var(--blur));
+    }
+
     @media (max-width: 49em) {
       display: none;
     }
@@ -123,14 +150,30 @@
   // .item-teams__inner
 
   &__inner {
+    position: relative;
+
     display: flex;
     min-height: 63.6rem;
     border-radius: 0.4rem;
 
-    background-color: var(--c-primary);
+    overflow: hidden;
+
+    &::before {
+      content: '';
+
+      position: absolute;
+      inset: 0;
+
+      .set-homepage-css & {
+        opacity: var(--opacity);
+        filter: blur(var(--blur));
+      }
+
+      background-color: var(--c-primary);
+    }
 
     @media (max-width: 49em) {
-      min-height: 34.6rem;
+      min-height: 18.5vh;
       border-radius: 0.8rem;
     }
 
@@ -156,18 +199,18 @@
     top: 50%;
     left: 50%;
 
-    transform: translate(-50%, -50%) scaleY(0.9);
+    transform: translate(-50%, -50%) scaleY(0.6);
     transform-origin: center;
 
     svg {
-      height: 7rem;
+      width: 39rem;
 
       color: var(--c-bg);
 
       transition: color 0.5s ease-in-out;
 
       @media (max-width: 49em) {
-        height: 10rem;
+        width: 62rem;
       }
     }
   }
@@ -183,10 +226,6 @@
     opacity: 0;
 
     transition: opacity 0.5s ease-in-out;
-
-    @media (min-width: 49.01em) {
-      padding: 1.3rem;
-    }
 
     &::after {
       content: '';

@@ -1,10 +1,14 @@
 .news {
+  --opacity: 0;
+  --y: 100%;
+  --blur: 3rem;
+
   @media (min-width: 49.01em) {
     &::after {
       content: '';
 
       position: absolute;
-      bottom: 8rem;
+      bottom: 9rem;
       left: 0;
 
       width: 100%;
@@ -22,16 +26,33 @@
 
     @media (min-width: 49.01em) {
       justify-content: center;
+
+      &.container {
+        padding-bottom: 7rem;
+      }
     }
 
     @media (max-width: 49em) {
       &.container {
         padding-top: 12rem;
+        padding-bottom: 24rem;
+
+        justify-content: space-around;
       }
     }
   }
 
   // .news__filters
+
+  &__filters,
+  &::after,
+  &__controls {
+    .set-homepage-css & {
+      opacity: var(--opacity);
+      transform: translateY(var(--y));
+      filter: blur(var(--blur));
+    }
+  }
 
   &__filters {
     margin-bottom: 15.2rem;
@@ -47,6 +68,13 @@
 
     @media (max-width: 450px) and (max-height: 850px) {
       margin-bottom: 6rem;
+    }
+
+    @media (min-width: 49.01em) {
+      ._small-screen &,
+      ._hf & {
+        margin-bottom: 7rem;
+      }
     }
   }
 
@@ -73,6 +101,10 @@
   // .news__slider
 
   &__slider {
+    .set-homepage-css & {
+      @extend %ov-t;
+    }
+
     &.swiper {
       margin-left: 0;
       margin-right: 0;
@@ -81,7 +113,14 @@
     @media (min-width: 49.01em) {
       margin-bottom: 13.7rem;
 
+      ._small-screen &,
+      ._hf & {
+        margin-bottom: 7rem;
+      }
+
       &.swiper {
+        padding-left: 3rem;
+
         width: 101%;
       }
     }
@@ -92,11 +131,11 @@
   &__wrapper {
     &.swiper-wrapper {
       @media (max-width: 49em) {
+        margin: 0 auto;
+
         flex-direction: column;
         row-gap: 10.6rem;
-      }
-      @media (max-width: 450px) and (max-height: 850px) {
-        row-gap: 2.6rem;
+        max-width: 90rem;
       }
     }
   }
@@ -140,7 +179,7 @@
     position: relative;
     z-index: 2;
 
-    padding: 1.3rem 1.8rem;
+    padding: 1.3rem 1.7rem;
 
     display: flex;
     flex-direction: column;
@@ -162,13 +201,17 @@
   // .news-card__heading
 
   &__heading {
-    max-width: 29.2rem;
+    max-width: 33.2rem;
 
     font: var(--h-sm);
+    line-height: 109%;
     text-transform: uppercase;
 
     @media (max-width: 49em) {
       max-width: 40.8rem;
+
+      line-height: 106%;
+      letter-spacing: 0.04rem;
     }
   }
 

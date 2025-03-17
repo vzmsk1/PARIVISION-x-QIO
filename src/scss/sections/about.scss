@@ -7,7 +7,7 @@
 
     display: flex;
     flex-direction: column-reverse;
-    row-gap: 22rem;
+    row-gap: 23rem;
 
     &.container {
       padding-bottom: 25.2rem;
@@ -20,7 +20,14 @@
       grid-template-rows: 13rem minmax(22.9rem, auto);
 
       &.container {
-        padding-bottom: 12.4rem;
+        padding-bottom: 11.5vh;
+      }
+    }
+    @media (min-width: 49.01em) and (min-height: 600px) {
+      &.container {
+        &:not(._hf &, ._small-screen &) {
+          padding-bottom: 40vh;
+        }
       }
     }
   }
@@ -33,6 +40,9 @@
     max-width: 194rem;
 
     @media (max-width: 49em) {
+      margin: 0 auto;
+
+      width: inherit;
       max-width: 100rem;
       flex-direction: column;
       row-gap: 0.8rem;
@@ -48,24 +58,37 @@
 
     @media (min-width: 49.01em) {
       &:first-child {
-        margin-right: 72.5rem;
+        margin-right: 73.6rem;
+
+        ._hf & {
+          margin-right: 72.5rem;
+        }
       }
       &:nth-child(3) {
-        margin-left: 61.7rem;
+        margin-left: 60.8rem;
       }
       &:nth-child(4) {
         margin-top: 0.5rem;
-        margin-left: 92.2rem;
+        margin-left: 91.5rem;
       }
     }
 
     @media (max-width: 49em) {
+      &:nth-child(1) {
+        margin-left: -1rem;
+      }
       &:nth-child(2) {
-        margin-right: 0.8rem;
+        margin-right: 0;
       }
       &:nth-child(2),
       &:nth-child(3) {
         margin-left: auto;
+      }
+      &:nth-child(3) {
+        margin-right: 0.6rem;
+      }
+      &:nth-child(4) {
+        margin-left: -1rem;
       }
     }
   }
@@ -94,10 +117,12 @@
 
     @media (min-width: 49.01em) {
       &:first-child {
+        padding-left: 0.6rem;
+
         max-width: 34.8rem;
       }
       &:last-child {
-        max-width: 28.7rem;
+        max-width: 30rem;
       }
     }
   }
@@ -108,9 +133,14 @@
   z-index: 1;
   inset: 0;
 
-  video {
-    .set-homepage-css & {
-      @extend %opacity;
-    }
+  // > [data-videojs] {
+  //   .set-homepage-css & {
+  //     @extend %opacity;
+  //   }
+  // }
+}
+#homepage-video-1 video {
+  @media (max-width: 49em) {
+    object-position: -103rem top;
   }
 }

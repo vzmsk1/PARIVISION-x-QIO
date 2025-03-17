@@ -1,8 +1,9 @@
 import gsap from 'gsap';
 import { Observer } from 'gsap/all';
 import { isTouchDevice, removeClasses } from '../utils/utils';
-import { timelines, duration } from './timelines';
+import { timelines, duration, tlMain, tlLinksLeave } from './timelines';
 import { headings, initLeadersScreenObserver } from './homepage';
+import { md } from '../utils/script';
 
 gsap.registerPlugin(Observer);
 
@@ -19,6 +20,13 @@ const leaders = gsap.utils.toArray('.leaders__group');
 const table = document.querySelector('.homepage-table');
 const heading = document.getElementById('section-heading');
 export const sections = gsap.utils.toArray('[data-section]');
+
+const shiftBg = (deltaY = true) => {
+  yPos = +document.documentElement.dataset.yShift;
+  yPos = deltaY ? yPos - 16 : yPos + 16;
+  document.documentElement.dataset.yShift = yPos;
+  gsap.to('.homepage', { '--y': `${yPos}rem`, duration });
+};
 
 const scroll = (self, i, deltaY) => {
   if (
@@ -49,9 +57,11 @@ const down = self => {
 
       if (
         leadersIdx !== 0 &&
-        !headings[headings.length - 1].classList.contains('_is-active')
+        !headings[headings.length - 1].classList.contains('_is-active') &&
+        !document.documentElement.classList.contains('_is-animating')
       ) {
         initLeadersScreenObserver(self, leaders, leadersIdx);
+        shiftBg(true);
       } else if (
         headings[headings.length - 1].classList.contains('_is-active')
       ) {
@@ -59,6 +69,14 @@ const down = self => {
         scroll(self, activeIdx, 1);
       }
     }
+  } else {
+    // tlMain.revert();
+    // tlLinksLeave.play();
+    // tlLinksLeave.then(() => {
+    //   document.querySelector('[data-section]').classList.add(ACTIVE_CLASS);
+    //   resetActiveSection(document.querySelector('[data-section]'));
+    // });
+    // tlMain.play();
   }
 };
 const up = self => {
@@ -79,8 +97,12 @@ const up = self => {
       );
       leadersIdx -= 1;
 
-      if (leadersIdx !== -1) {
+      if (
+        leadersIdx !== -1 &&
+        !document.documentElement.classList.contains('_is-animating')
+      ) {
         initLeadersScreenObserver(self, leaders, leadersIdx);
+        shiftBg(false);
       } else {
         document.documentElement.classList.remove('leaders-screen');
         scroll(self, activeIdx, -1);
@@ -89,32 +111,38 @@ const up = self => {
   }
 };
 
+const observerCnd = observer => {
+  return (
+    observer.event.target.closest('.menu') ||
+    (isTouch && observer.event.target.closest('.news__filters')) ||
+    (observer.event.target.closest('.news__slider') && !md.matches)
+  );
+};
+
 export const observer = Observer.create({
   target: '.homepage',
   type: 'wheel,touch',
   wheelSpeed: isTouch ? -1 : 1,
   onUp: self => {
-    if (
-      !self.event.target.closest('.menu') &&
-      !self.event.target.closest('.news__filters')
-    ) {
-      if (isTouch) {
-        down(self);
-      } else {
-        up(self);
-      }
+    if (observerCnd(self)) {
+      return;
+    }
+
+    if (isTouch) {
+      down(self);
+    } else {
+      up(self);
     }
   },
   onDown: self => {
-    if (
-      !self.event.target.closest('.menu') &&
-      !self.event.target.closest('.news__filters')
-    ) {
-      if (isTouch) {
-        up(self);
-      } else {
-        down(self);
-      }
+    if (observerCnd(self)) {
+      return;
+    }
+
+    if (isTouch) {
+      up(self);
+    } else {
+      down(self);
     }
   },
 });
@@ -132,41 +160,41 @@ export const resetActiveSection = (section, deltaY = -1) => {
       const tl = timelines.filter(tl => tl.vars.id === `${curIdx}-on`)[0];
       removeClasses(sections, ACTIVE_CLASS);
       sections[curIdx].classList.add(ACTIVE_CLASS);
+
       if (tl) {
         tl.restart(true);
       }
       prevTl.revert();
     };
 
-    if (section.dataset.section !== 'leaders') {
-      if (prevIdx >= 0 && document.querySelector(`.${INIT_SCROLL_CLASS}`)) {
-        const curTl = timelines.filter(
-          tl => tl.vars.id === `${prevIdx}-off`
-        )[0];
+    // if (section.dataset.section !== 'leaders') {
+    if (prevIdx >= 0 && document.querySelector(`.${INIT_SCROLL_CLASS}`)) {
+      const curTl = timelines.filter(tl => tl.vars.id === `${prevIdx}-off`)[0];
 
-        curTl.restart();
-        curTl.then(() => {
-          transition(curTl);
-        });
-      }
+      curTl.restart();
+      curTl.then(() => {
+        transition(curTl);
+      });
+    }
 
-      document.documentElement.classList.add(ANIMATING_CLASS);
+    document.documentElement.classList.add(ANIMATING_CLASS);
 
-      yPos = deltaY === 1 ? yPos - 16 : yPos + 16;
+    yPos = deltaY === 1 ? yPos - 16 : yPos + 16;
 
-      gsap.to('.homepage', { '--y': `${yPos}rem`, duration });
+    gsap.to('.homepage', { '--y': `${yPos}rem`, duration });
+    document.documentElement.dataset.yShift = yPos;
 
-      if (bullets.length && curBullet) {
-        removeClasses(bullets, ACTIVE_CLASS);
-        curBullet.classList.add(ACTIVE_CLASS);
-      }
+    if (bullets.length && curBullet) {
+      removeClasses(bullets, ACTIVE_CLASS);
+      curBullet.classList.add(ACTIVE_CLASS);
+    }
 
-      if (heading) {
-        heading.innerHTML = section.dataset.section;
-      }
+    if (heading) {
+      heading.innerHTML = section.dataset.section;
     }
   }
 };
+// };
 
 export const initHomepageScroll = () => {
   document.documentElement.classList.add(INIT_SCROLL_CLASS);

@@ -18,6 +18,11 @@ const preloaderVideo = videojs.getPlayer(
   document.querySelector('.preloader [data-videojs]')
 );
 const video1 = document.getElementById('homepage-video-1');
+const video1r = document.getElementById('homepage-video-1-r');
+const video2 = document.getElementById('homepage-video-2');
+const player1 = videojs.getPlayer(video1.querySelector('video'));
+const player1r = videojs.getPlayer(video1r.querySelector('video'));
+const player2 = videojs.getPlayer(video2.querySelector('video'));
 const table = document.querySelector('.homepage-table');
 const sectionMain = document.querySelector('[data-section="main"]');
 const sectionAbout = document.querySelector('[data-section="about"]');
@@ -40,7 +45,7 @@ const blurTopProps = {
 };
 const opacityTopProps = {
   opacity: 0,
-  translateY: '-10%',
+  translateY: '-100%',
 };
 
 const onDefaults = {
@@ -171,6 +176,7 @@ tlMain
       }
     },
   })
+  .to('html', { '--opacity': 1 }, 0)
   .to('body', { '--opacity': 1 }, 0);
 tlMainLeave.to('.hero__container', blurTopProps);
 
@@ -221,15 +227,15 @@ tlAbout
     },
     1
   )
+  // .to(
+  //   '#homepage-video-1',
+  //   {
+  //     opacity: 1,
+  //   },
+  //   0.7
+  // )
   .to(
-    '#homepage-video-1 video',
-    {
-      opacity: 1,
-    },
-    0.7
-  )
-  .to(
-    'html',
+    'body',
     {
       '--opacity': 0,
     },
@@ -238,7 +244,20 @@ tlAbout
 tlAboutLeave.to('.about__heading, .about__text-wrap', {
   ...blurTopProps,
   onStart: () => {
-    videojs.getPlayer(video1) && videojs.getPlayer(video1).play();
+    // player1 && player1.currentTime(0);
+
+    if (observer.deltaY > 0) {
+      // player1 && player1.play();
+    } else {
+      // gsap.timeline().to(
+      //   '#homepage-video-1, #homepage-video-1-r',
+      //   {
+      //     opacity: 0,
+      //     delay: 1,
+      //   },
+      //   0
+      // );
+    }
   },
 });
 
@@ -256,6 +275,9 @@ tlTeam
     translateY: 0,
     duration: 1,
     stagger: 0.1,
+    onStart: () => {
+      // player2 && player2.currentTime(0);
+    },
   })
   .to(
     '.team__heading span',
@@ -263,9 +285,33 @@ tlTeam
     0.3
   )
   .to('.team__txt', clearedProps, 0);
-tlTeamLeave
-  .to('.team__heading span', blurTopProps)
-  .to('.team__txt', opacityTopProps, 0);
+tlTeamLeave.to('.team__heading span', blurTopProps).to(
+  '.team__txt',
+  {
+    ...opacityTopProps,
+    onStart: () => {
+      if (observer.deltaY < 0) {
+        // gsap.set('#homepage-video-1-r', { opacity: 1 });
+        // gsap.set('#homepage-video-1', { opacity: 0 });
+        // player1r && player1r.playbackRate(1.5);
+        // player1r && player1r.play();
+      } else {
+        // gsap.set('#homepage-video-2', { opacity: 1 });
+
+        if (!document.querySelector('.leaders__group._is-visible')) {
+          // gsap.set('#homepage-video-1, #homepage-video-1-r', { opacity: 0 });
+          // player2 && player2.play();
+        } else {
+          // player2.currentTime(player2.duration());
+          // gsap
+          //   .timeline()
+          //   .to('#homepage-video-1, #homepage-video-1-r', { opacity: 0 });
+        }
+      }
+    },
+  },
+  0
+);
 
 export const tlLeaders = gsap.timeline({
   ...onDefaults,
@@ -275,26 +321,43 @@ export const tlLeadersLeave = gsap.timeline({
   ...offDefaults,
   id: `${sections.indexOf(sectionLeaders)}-off`,
 });
-tlLeaders.to('.leaders__container, .leaders__group_center', {
-  ...clearedProps,
-  onStart: () => {
-    document.documentElement.classList.add('leaders-screen');
+tlLeaders
+  .to('.leaders__container, .leaders__group_center', {
+    ...clearedProps,
+    onStart: () => {
+      document.documentElement.classList.add('leaders-screen');
 
-    table && table.classList.add('_leaders-btn');
+      // gsap.timeline().to('#homepage-video-2', { opacity: 1, duration: 1.5 });
 
-    if (!document.querySelector('.leaders__group._is-visible')) {
-      document
-        .querySelector('.leaders__group-heading_main')
-        .classList.add('_is-active');
-    }
-  },
-});
-tlLeadersLeave.to('.leaders__container', {
-  opacity: 0,
-  onComplete: () => {
-    table && table.classList.remove('_leaders-btn');
-  },
-});
+      table && table.classList.add('_leaders-btn');
+
+      setTimeout(() => {
+        if (!document.querySelector('.leaders__group._is-visible')) {
+          document
+            .querySelector('.leaders__group-heading_main')
+            .classList.add('_is-active');
+        }
+      }, 1000);
+    },
+  })
+  .to('html, .leaders', { '--opacity': 1 }, 0);
+tlLeadersLeave
+  .to('.leaders__container', {
+    opacity: 0,
+    onStart: () => {
+      // gsap.timeline().to('#homepage-video-2', { opacity: 0, duration: 1.5 });
+
+      if (observer.deltaY > 0) {
+        // gsap.set('#homepage-video-1-r, #homepage-video-1', { opacity: 0 });
+      } else {
+        // gsap.timeline().to('#homepage-video-1', { opacity: 1, delay: 1 });
+      }
+    },
+    onComplete: () => {
+      table && table.classList.remove('_leaders-btn');
+    },
+  })
+  .to('.leaders', { '--opacity': 0 }, 0);
 
 export const tlTeams = gsap.timeline({
   ...onDefaults,
@@ -305,23 +368,54 @@ export const tlTeamsLeave = gsap.timeline({
   id: `${sections.indexOf(sectionTeams)}-off`,
 });
 tlTeams
-  .to('.teams__item', {
-    ...clearedProps,
-    stagger: 0.3,
-    onStart: () => {
-      table && table.classList.add('_teams-btn');
+  .to('.teams', { '--opacity': 1 })
+  .to(
+    '.item-teams',
+    {
+      '--opacity': 1,
+      visibility: 'visible',
+      stagger: 0.3,
+      onStart: () => {
+        table && table.classList.add('_teams-btn');
+      },
+    },
+    0
+  )
+  .to(
+    '.item-teams',
+    {
+      '--blur': '0rem',
+      duration: 1,
+      stagger: 0.3,
+    },
+    0
+  )
+  .to(
+    '.item-teams__logo',
+    {
+      scaleY: 1,
+      stagger: 0.3,
+    },
+    0
+  );
+tlTeamsLeave
+  .to('.teams', {
+    '--opacity': 0,
+    onComplete: () => {
+      table && table.classList.remove('_teams-btn');
     },
   })
-  .to('.item-teams__logo', {
-    scaleY: 1,
-    stagger: 0.3,
-  });
-tlTeamsLeave.to('.teams__container', {
-  opacity: 0,
-  onComplete: () => {
-    table && table.classList.remove('_teams-btn');
-  },
-});
+  .to(
+    '.item-teams',
+    {
+      '--skew1': '-10deg',
+      '--skew2': '10deg',
+      stagger: 0.3,
+      ...blurTopProps,
+    },
+    0
+  )
+  .to('.item-teams__logo', { scaleY: 0.7, stagger: 0.3 }, 0);
 
 export const tlNews = gsap.timeline({
   ...onDefaults,
@@ -331,14 +425,25 @@ export const tlNewsLeave = gsap.timeline({
   ...offDefaults,
   id: `${sections.indexOf(sectionNews)}-off`,
 });
-tlNews.to('.news__container', {
-  ...clearedProps,
-  onStart: () => {
-    table && table.classList.add('_news-btn');
-  },
-});
+tlNews
+  .to('.news', {
+    '--y': 0,
+    '--opacity': 1,
+    duration: 1,
+    onStart: () => {
+      table && table.classList.add('_news-btn');
+    },
+  })
+  .to(
+    '.news',
+    {
+      '--blur': '0rem',
+    },
+    0
+  )
+  .to('.news__slider', { opacity: 1, visibility: 'visible', translateY: 0 }, 0);
 tlNewsLeave.to('.news__container', {
-  opacity: 0,
+  ...blurTopProps,
   onComplete: () => {
     table && table.classList.remove('_news-btn');
   },
@@ -352,14 +457,14 @@ export const tlContactsLeave = gsap.timeline({
   ...offDefaults,
   id: `${sections.indexOf(sectionContacts)}-off`,
 });
-tlContacts.to('.news__container', {
+tlContacts.to('.contacts__container', {
   ...clearedProps,
   onStart: () => {
     table && table.classList.add('_contacts-btn');
   },
 });
-tlContactsLeave.to('.news__container', {
-  opacity: 0,
+tlContactsLeave.to('.contacts__container', {
+  ...blurTopProps,
   onComplete: () => {
     table && table.classList.remove('_contacts-btn');
   },
@@ -380,7 +485,7 @@ tlLinks.to('.links__container', {
   },
 });
 tlLinksLeave.to('.links__container', {
-  opacity: 0,
+  ...blurTopProps,
   onComplete: () => {
     table && table.classList.remove('_is-hidden');
   },

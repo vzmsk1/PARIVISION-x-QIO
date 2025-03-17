@@ -15,7 +15,7 @@
   }
 
   @media (max-width: 49em) {
-    padding: 0 1.8rem;
+    padding-bottom: 1rem;
 
     bottom: 4rem;
   }
@@ -23,7 +23,7 @@
   // .homepage-table__container
 
   &__container {
-    transition: oapcity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 
     ._is-hidden & {
       opacity: 0;
@@ -32,7 +32,7 @@
 
     @media (min-width: 49.01em) {
       display: grid;
-      grid-template-columns: 12fr 9fr 4fr;
+      grid-template-columns: 11.9fr 9fr 4fr;
       align-items: end;
 
       ._teams-btn &,
@@ -43,8 +43,7 @@
       }
 
       &.container {
-        padding: 1.2rem;
-        padding-top: 0;
+        padding-bottom: 1.2rem;
       }
     }
   }
@@ -64,8 +63,8 @@
   // .homepage-table__bullet
 
   &__bullet {
-    flex: 0 0 0.6rem;
-    width: 0.6rem;
+    flex: 0 0 0.7rem;
+    width: 0.7rem;
     height: 2.1rem;
     border: 1px solid var(--c-primary);
     border-radius: 0.2rem;
@@ -110,6 +109,8 @@
   // .homepage-table__info
 
   &__info {
+    padding-bottom: 0.6rem;
+
     ._teams-btn &,
     ._leaders-btn &,
     ._news-btn &,
@@ -206,6 +207,12 @@
 
       border-radius: 0.8rem;
     }
+
+    @media (min-width: 49.01em) {
+      &:not(.homepage-table__list-item_all &) {
+        padding-right: 2.4rem;
+      }
+    }
   }
 
   // .list-item-homepage-table__info
@@ -240,6 +247,7 @@
 
   &__txt {
     color: rgba(0, 0, 0, 0.4);
+    font-family: 'Aeonik Mono';
 
     @media (max-width: 49em) {
       font-size: var(--fz-13-hf);
