@@ -1,7 +1,7 @@
 <html style="background-color: #000000" lang="ru">
   @@include('html/_head.htm',{ "title":"PARIVISION x QIO" })
 
-  <body style="background: url(@img/vectors/bg.svg) center / cover repeat">
+  <body>
     <div
       style="
         display: flex;
@@ -167,6 +167,8 @@
         font-weight: 800;
 
         user-select: none;
+
+        background: url(@img/vectors/bg.svg) center / contain repeat;
       }
       ul {
         margin-bottom: 10rem;
@@ -199,8 +201,11 @@
         text-align: center;
       }
       @media (max-width: 49em) {
+        body {
+          background: url(@img/vectors/bg-m.svg) center / contain repeat;
+        }
         html {
-          font-size: 1.5625vw;
+          font-size: 1.3625vw;
         }
       }
     </style>
