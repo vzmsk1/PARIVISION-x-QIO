@@ -23,7 +23,7 @@
         padding-bottom: 11.5vh;
       }
     }
-    @media (min-width: 49.01em) and (min-height: 600px) {
+    @media (min-width: 49.01em) and (min-height: 600px) and (max-width: 64em) {
       &.container {
         &:not(._hf &, ._small-screen &) {
           padding-bottom: 40vh;
@@ -141,6 +141,6 @@
 }
 #homepage-video-1 video {
   @media (max-width: 49em) {
-    object-position: -103rem top;
+    object-position: center top;
   }
 }

@@ -18,11 +18,11 @@ const preloaderVideo = videojs.getPlayer(
   document.querySelector('.preloader [data-videojs]')
 );
 const video1 = document.getElementById('homepage-video-1');
-const video1r = document.getElementById('homepage-video-1-r');
-const video2 = document.getElementById('homepage-video-2');
+// const video1r = document.getElementById('homepage-video-1-r');
+// const video2 = document.getElementById('homepage-video-2');
 const player1 = videojs.getPlayer(video1.querySelector('video'));
-const player1r = videojs.getPlayer(video1r.querySelector('video'));
-const player2 = videojs.getPlayer(video2.querySelector('video'));
+// const player1r = videojs.getPlayer(video1r.querySelector('video'));
+// const player2 = videojs.getPlayer(video2.querySelector('video'));
 const table = document.querySelector('.homepage-table');
 const sectionMain = document.querySelector('[data-section="main"]');
 const sectionAbout = document.querySelector('[data-section="about"]');
@@ -162,6 +162,9 @@ export const tlMainLeave = gsap.timeline({
 tlMain
   .to('.hero__container', {
     ...clearedProps,
+    onStart: () => {
+      gsap.timeline().to(video1, { opacity: 0 });
+    },
     onComplete: () => {
       if (!document.querySelector(`.${INIT_SCROLL_CLASS}`)) {
         itemsTl.play();
@@ -188,11 +191,21 @@ export const tlAboutLeave = gsap.timeline({
   ...offDefaults,
   id: `${sections.indexOf(sectionAbout)}-off`,
 });
+let isPlayed = 0;
 tlAbout
   .to('.about__heading-txt:first-child, .about__heading-txt:nth-child(2)', {
     duration: 1,
     opacity: 1,
     translateY: 0,
+    onStart: () => {
+      gsap.timeline().to(
+        video1,
+        {
+          opacity: 1,
+        },
+        0.7
+      );
+    },
   })
   .to(
     '.about__heading-txt:first-child, .about__heading-txt:nth-child(2)',
@@ -227,13 +240,7 @@ tlAbout
     },
     1
   )
-  // .to(
-  //   '#homepage-video-1',
-  //   {
-  //     opacity: 1,
-  //   },
-  //   0.7
-  // )
+
   .to(
     'body',
     {
@@ -244,7 +251,11 @@ tlAbout
 tlAboutLeave.to('.about__heading, .about__text-wrap', {
   ...blurTopProps,
   onStart: () => {
-    // player1 && player1.currentTime(0);
+    isPlayed += 1;
+    console.log(isPlayed);
+    if (player1 && isPlayed === 1) {
+      player1.currentTime(0), player1.play();
+    }
 
     if (observer.deltaY > 0) {
       // player1 && player1.play();
@@ -277,6 +288,8 @@ tlTeam
     stagger: 0.1,
     onStart: () => {
       // player2 && player2.currentTime(0);
+
+      gsap.timeline().to(video1, { opacity: 1 }, 0);
 
       table && table.removeAttribute('data-table-section');
     },
@@ -329,7 +342,10 @@ tlLeaders
     onStart: () => {
       document.documentElement.classList.add('leaders-screen');
 
+      gsap.timeline().to(video1, { opacity: 0 }, 0);
+
       // gsap.timeline().to('#homepage-video-2', { opacity: 1, duration: 1.5 });
+      // player2 && player2.currentTime(0), player2.play();
 
       table && (table.dataset.tableSection = 'leaders');
 

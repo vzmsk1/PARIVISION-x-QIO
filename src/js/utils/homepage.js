@@ -3,7 +3,7 @@ import { md } from './script';
 
 export const checkScreenSize = () => {
   const x = md.matches ? 2.16744186 : 2;
-  const s = 1.76146789;
+  const s = 1.78;
   const l = 0.749633968;
   const width = window.screen.availWidth;
   const height = window.screen.availHeight;
