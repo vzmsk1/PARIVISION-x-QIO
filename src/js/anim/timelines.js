@@ -252,7 +252,6 @@ tlAboutLeave.to('.about__heading, .about__text-wrap', {
   ...blurTopProps,
   onStart: () => {
     isPlayed += 1;
-    console.log(isPlayed);
     if (player1 && isPlayed === 1) {
       player1.currentTime(0), player1.play();
     }
