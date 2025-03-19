@@ -22,6 +22,16 @@ window.addEventListener('load', function () {
             return current + '//' + total;
           },
         },
+        on: {
+          sliderMove: () => {
+            document.documentElement.classList.add('_slide-move');
+          },
+          touchEnd: () => {
+            setTimeout(() => {
+              document.documentElement.classList.remove('_slide-move');
+            }, 1000);
+          },
+        },
       });
 
       return () => {

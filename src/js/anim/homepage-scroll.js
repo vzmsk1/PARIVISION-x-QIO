@@ -115,7 +115,7 @@ const observerCnd = observer => {
   return (
     observer.event.target.closest('.menu') ||
     (isTouch && observer.event.target.closest('.news__filters')) ||
-    (observer.event.target.closest('.news__slider') && !md.matches)
+    document.documentElement.classList.contains('_slide-move')
   );
 };
 

@@ -12,6 +12,10 @@
 
   &._is-hidden {
     pointer-events: none;
+
+    &::after {
+      opacity: 0;
+    }
   }
 
   .set-homepage-css & {
